@@ -1,11 +1,21 @@
 'use client'
 
-import React, { createContext, useCallback, use, useEffect, useState } from 'react'
-
-import type { Theme, ThemeContextType } from './types'
+import React, {
+  createContext,
+  use,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react'
 
 import canUseDOM from '@/utilities/canUseDOM'
-import { defaultTheme, getImplicitPreference, themeLocalStorageKey } from './shared'
+
+import {
+  defaultTheme,
+  getImplicitPreference,
+  themeLocalStorageKey,
+} from './shared'
+import type { Theme, ThemeContextType } from './types'
 import { themeIsValid } from './types'
 
 const initialContext: ThemeContextType = {
@@ -17,14 +27,21 @@ const ThemeContext = createContext(initialContext)
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const [theme, setThemeState] = useState<Theme | undefined>(
-    canUseDOM ? (document.documentElement.getAttribute('data-theme') as Theme) : undefined,
+    canUseDOM
+      ? (document.documentElement.getAttribute('data-theme') as Theme)
+      : undefined,
   )
 
   const setTheme = useCallback((themeToSet: Theme | null) => {
     if (themeToSet === null) {
       window.localStorage.removeItem(themeLocalStorageKey)
       const implicitPreference = getImplicitPreference()
-      document.documentElement.setAttribute('data-theme', implicitPreference || '')
+
+      document.documentElement.setAttribute(
+        'data-theme',
+        implicitPreference || '',
+      )
+
       if (implicitPreference) setThemeState(implicitPreference)
     } else {
       setThemeState(themeToSet)

@@ -1,16 +1,15 @@
 'use client'
 
-import type { PayloadAdminBarProps, PayloadMeUser } from '@payloadcms/admin-bar'
-
-import { cn } from '@/utilities/ui'
-import { useSelectedLayoutSegments } from 'next/navigation'
-import { PayloadAdminBar } from '@payloadcms/admin-bar'
-import React, { useState } from 'react'
-import { useRouter } from 'next/navigation'
-
 import './index.scss'
 
+import type { PayloadAdminBarProps, PayloadMeUser } from '@payloadcms/admin-bar'
+import { PayloadAdminBar } from '@payloadcms/admin-bar'
+import { useSelectedLayoutSegments } from 'next/navigation'
+import { useRouter } from 'next/navigation'
+import React, { useState } from 'react'
+
 import { getClientSideURL } from '@/utilities/getURL'
+import { cn } from '@/utilities/ui'
 
 const baseClass = 'admin-bar'
 
@@ -38,7 +37,9 @@ export const AdminBar: React.FC<{
   const segments = useSelectedLayoutSegments()
   const [show, setShow] = useState(false)
   const collection = (
-    collectionLabels[segments?.[1] as keyof typeof collectionLabels] ? segments[1] : 'pages'
+    collectionLabels[segments?.[1] as keyof typeof collectionLabels]
+      ? segments[1]
+      : 'pages'
   ) as keyof typeof collectionLabels
   const router = useRouter()
 
@@ -53,10 +54,10 @@ export const AdminBar: React.FC<{
         hidden: !show,
       })}
     >
-      <div className="container">
+      <div className={'container'}>
         <PayloadAdminBar
           {...adminBarProps}
-          className="py-2 text-white"
+          className={'py-2 text-white'}
           classNames={{
             controls: 'font-medium text-white',
             logo: 'text-white',

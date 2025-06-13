@@ -1,15 +1,14 @@
 'use client'
 
 import type { StaticImageData } from 'next/image'
-
-import { cn } from '@/utilities/ui'
 import NextImage from 'next/image'
 import React from 'react'
 
-import type { Props as MediaProps } from '../types'
-
 import { cssVariables } from '@/cssVariables'
 import { getMediaUrl } from '@/utilities/getMediaUrl'
+import { cn } from '@/utilities/ui'
+
+import type { Props as MediaProps } from '../types'
 
 const { breakpoints } = cssVariables
 
@@ -36,7 +35,12 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
   let src: StaticImageData | string = srcFromProps || ''
 
   if (!src && resource && typeof resource === 'object') {
-    const { alt: altFromResource, height: fullHeight, url, width: fullWidth } = resource
+    const {
+      alt: altFromResource,
+      height: fullHeight,
+      url,
+      width: fullWidth,
+    } = resource
 
     width = fullWidth!
     height = fullHeight!
@@ -63,7 +67,7 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
         className={cn(imgClassName)}
         fill={fill}
         height={!fill ? height : undefined}
-        placeholder="blur"
+        placeholder={'blur'}
         blurDataURL={placeholderBlur}
         priority={priority}
         quality={100}

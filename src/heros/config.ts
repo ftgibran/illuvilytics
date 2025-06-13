@@ -1,11 +1,10 @@
-import type { Field } from 'payload'
-
 import {
   FixedToolbarFeature,
   HeadingFeature,
   InlineToolbarFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
+import type { Field } from 'payload'
 
 import { linkGroup } from '@/fields/linkGroup'
 
@@ -62,7 +61,8 @@ export const hero: Field = {
       name: 'media',
       type: 'upload',
       admin: {
-        condition: (_, { type } = {}) => ['highImpact', 'mediumImpact'].includes(type),
+        condition: (_, { type } = {}) =>
+          ['highImpact', 'mediumImpact'].includes(type),
       },
       relationTo: 'media',
       required: true,

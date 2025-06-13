@@ -1,6 +1,10 @@
 import { BeforeSync, DocToSync } from '@payloadcms/plugin-search/types'
 
-export const beforeSyncWithSearch: BeforeSync = async ({ req, originalDoc, searchDoc }) => {
+export const beforeSyncWithSearch: BeforeSync = async ({
+  req,
+  originalDoc,
+  searchDoc,
+}) => {
   const {
     doc: { relationTo: collection },
   } = searchDoc
@@ -21,6 +25,7 @@ export const beforeSyncWithSearch: BeforeSync = async ({ req, originalDoc, searc
 
   if (categories && Array.isArray(categories) && categories.length > 0) {
     const populatedCategories: { id: string | number; title: string }[] = []
+
     for (const category of categories) {
       if (!category) {
         continue

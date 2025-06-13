@@ -1,10 +1,8 @@
-import type { CollectionSlug, PayloadRequest } from 'payload'
-import { getPayload } from 'payload'
-
+import configPromise from '@payload-config'
 import { draftMode } from 'next/headers'
 import { redirect } from 'next/navigation'
-
-import configPromise from '@payload-config'
+import type { CollectionSlug, PayloadRequest } from 'payload'
+import { getPayload } from 'payload'
 
 export async function GET(
   req: {
@@ -25,7 +23,9 @@ export async function GET(
   const previewSecret = searchParams.get('previewSecret')
 
   if (previewSecret !== process.env.PREVIEW_SECRET) {
-    return new Response('You are not allowed to preview this page', { status: 403 })
+    return new Response('You are not allowed to preview this page', {
+      status: 403,
+    })
   }
 
   if (!path || !collection || !slug) {
@@ -33,7 +33,10 @@ export async function GET(
   }
 
   if (!path.startsWith('/')) {
-    return new Response('This endpoint can only be used for relative previews', { status: 500 })
+    return new Response(
+      'This endpoint can only be used for relative previews',
+      { status: 500 },
+    )
   }
 
   let user
@@ -44,15 +47,24 @@ export async function GET(
       headers: req.headers,
     })
   } catch (error) {
-    payload.logger.error({ err: error }, 'Error verifying token for live preview')
-    return new Response('You are not allowed to preview this page', { status: 403 })
+    payload.logger.error(
+      { err: error },
+      'Error verifying token for live preview',
+    )
+
+    return new Response('You are not allowed to preview this page', {
+      status: 403,
+    })
   }
 
   const draft = await draftMode()
 
   if (!user) {
     draft.disable()
-    return new Response('You are not allowed to preview this page', { status: 403 })
+
+    return new Response('You are not allowed to preview this page', {
+      status: 403,
+    })
   }
 
   // You can add additional checks here to see if the user is allowed to preview this page

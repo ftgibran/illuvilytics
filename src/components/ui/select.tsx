@@ -1,9 +1,10 @@
 'use client'
 
-import { cn } from '@/utilities/ui'
 import * as SelectPrimitive from '@radix-ui/react-select'
 import { Check, ChevronDown, ChevronUp } from 'lucide-react'
 import * as React from 'react'
+
+import { cn } from '@/utilities/ui'
 
 const Select = SelectPrimitive.Root
 
@@ -12,7 +13,9 @@ const SelectGroup = SelectPrimitive.Group
 const SelectValue = SelectPrimitive.Value
 
 const SelectTrigger: React.FC<
-  { ref?: React.Ref<HTMLButtonElement> } & React.ComponentProps<typeof SelectPrimitive.Trigger>
+  { ref?: React.Ref<HTMLButtonElement> } & React.ComponentProps<
+    typeof SelectPrimitive.Trigger
+  >
 > = ({ children, className, ref, ...props }) => (
   <SelectPrimitive.Trigger
     className={cn(
@@ -24,20 +27,25 @@ const SelectTrigger: React.FC<
   >
     {children}
     <SelectPrimitive.Icon asChild>
-      <ChevronDown className="h-4 w-4 opacity-50" />
+      <ChevronDown className={'h-4 w-4 opacity-50'} />
     </SelectPrimitive.Icon>
   </SelectPrimitive.Trigger>
 )
 
 const SelectScrollUpButton: React.FC<
-  { ref?: React.Ref<HTMLDivElement> } & React.ComponentProps<typeof SelectPrimitive.ScrollUpButton>
+  { ref?: React.Ref<HTMLDivElement> } & React.ComponentProps<
+    typeof SelectPrimitive.ScrollUpButton
+  >
 > = ({ className, ref, ...props }) => (
   <SelectPrimitive.ScrollUpButton
-    className={cn('flex cursor-default items-center justify-center py-1', className)}
+    className={cn(
+      'flex cursor-default items-center justify-center py-1',
+      className,
+    )}
     ref={ref}
     {...props}
   >
-    <ChevronUp className="h-4 w-4" />
+    <ChevronUp className={'h-4 w-4'} />
   </SelectPrimitive.ScrollUpButton>
 )
 
@@ -47,11 +55,14 @@ const SelectScrollDownButton: React.FC<
   >
 > = ({ className, ref, ...props }) => (
   <SelectPrimitive.ScrollDownButton
-    className={cn('flex cursor-default items-center justify-center py-1', className)}
+    className={cn(
+      'flex cursor-default items-center justify-center py-1',
+      className,
+    )}
     ref={ref}
     {...props}
   >
-    <ChevronDown className="h-4 w-4" />
+    <ChevronDown className={'h-4 w-4'} />
   </SelectPrimitive.ScrollDownButton>
 )
 
@@ -88,7 +99,9 @@ const SelectContent: React.FC<
 )
 
 const SelectLabel: React.FC<
-  { ref?: React.Ref<HTMLDivElement> } & React.ComponentProps<typeof SelectPrimitive.Label>
+  { ref?: React.Ref<HTMLDivElement> } & React.ComponentProps<
+    typeof SelectPrimitive.Label
+  >
 > = ({ className, ref, ...props }) => (
   <SelectPrimitive.Label
     className={cn('py-1.5 pl-8 pr-2 text-sm font-semibold', className)}
@@ -110,9 +123,11 @@ const SelectItem: React.FC<
     ref={ref}
     {...props}
   >
-    <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+    <span
+      className={'absolute left-2 flex h-3.5 w-3.5 items-center justify-center'}
+    >
       <SelectPrimitive.ItemIndicator>
-        <Check className="h-4 w-4" />
+        <Check className={'h-4 w-4'} />
       </SelectPrimitive.ItemIndicator>
     </span>
 
@@ -121,7 +136,9 @@ const SelectItem: React.FC<
 )
 
 const SelectSeparator: React.FC<
-  { ref?: React.Ref<HTMLDivElement> } & React.ComponentProps<typeof SelectPrimitive.Separator>
+  { ref?: React.Ref<HTMLDivElement> } & React.ComponentProps<
+    typeof SelectPrimitive.Separator
+  >
 > = ({ className, ref, ...props }) => (
   <SelectPrimitive.Separator
     className={cn('-mx-1 my-1 h-px bg-muted', className)}

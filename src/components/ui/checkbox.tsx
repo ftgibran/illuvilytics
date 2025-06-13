@@ -1,9 +1,10 @@
 'use client'
 
-import { cn } from '@/utilities/ui'
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox'
 import { Check } from 'lucide-react'
 import * as React from 'react'
+
+import { cn } from '@/utilities/ui'
 
 const Checkbox: React.FC<
   {
@@ -18,8 +19,10 @@ const Checkbox: React.FC<
     ref={ref}
     {...props}
   >
-    <CheckboxPrimitive.Indicator className={cn('flex items-center justify-center text-current')}>
-      <Check className="h-4 w-4" />
+    <CheckboxPrimitive.Indicator
+      className={cn('flex items-center justify-center text-current')}
+    >
+      <Check className={'h-4 w-4'} />
     </CheckboxPrimitive.Indicator>
   </CheckboxPrimitive.Root>
 )
