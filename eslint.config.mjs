@@ -17,6 +17,7 @@ const compat = new FlatCompat({
 
 const eslintConfig = defineConfig([
   pluginReact.configs.flat.recommended,
+  ...compat.extends('next/core-web-vitals', 'next/typescript'),
   {
     plugins: {
       js,
@@ -76,10 +77,9 @@ const eslintConfig = defineConfig([
       ],
     },
   },
-  ...compat.extends('next/core-web-vitals', 'next/typescript'),
   eslintConfigPrettier,
   {
-    ignores: ['.next/'],
+    ignores: ['.next/', 'src/app/(payload)/admin/importMap.js'],
   },
 ])
 

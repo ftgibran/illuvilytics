@@ -73,6 +73,7 @@ export interface Config {
     media: Media;
     categories: Category;
     users: User;
+    'combat-units': CombatUnit;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -90,6 +91,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    'combat-units': CombatUnitsSelect<false> | CombatUnitsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -799,6 +801,49 @@ export interface Form {
   createdAt: string;
 }
 /**
+ * Combat units available in the game
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "combat-units".
+ */
+export interface CombatUnit {
+  id: string;
+  /**
+   * Name of the combat unit
+   */
+  name: string;
+  /**
+   * Evolution stage (1-3)
+   */
+  stage: number;
+  /**
+   * Combat unit class
+   */
+  class: 'None' | 'Fighter' | 'Rogue' | 'Bulwark' | 'Psion' | 'Empath';
+  /**
+   * Combat unit element
+   */
+  element: 'None' | 'Water' | 'Earth' | 'Fire' | 'Nature' | 'Air';
+  /**
+   * Original JSON file name
+   */
+  sourceFile?: string | null;
+  /**
+   * Complete unit data from source file
+   */
+  data?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
@@ -994,6 +1039,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'users';
         value: string | User;
+      } | null)
+    | ({
+        relationTo: 'combat-units';
+        value: string | CombatUnit;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1398,6 +1447,20 @@ export interface UsersSelect<T extends boolean = true> {
   hash?: T;
   loginAttempts?: T;
   lockUntil?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "combat-units_select".
+ */
+export interface CombatUnitsSelect<T extends boolean = true> {
+  name?: T;
+  stage?: T;
+  class?: T;
+  element?: T;
+  sourceFile?: T;
+  data?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

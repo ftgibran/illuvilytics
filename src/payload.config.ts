@@ -5,10 +5,10 @@ import { buildConfig, PayloadRequest } from 'payload'
 import sharp from 'sharp' // sharp-import
 import { fileURLToPath } from 'url'
 
-import Illuvials from '@/collections/Illuvials'
 import { defaultLexical } from '@/fields/defaultLexical'
 
 import { Categories } from './collections/Categories'
+import { CombatUnits } from './collections/CombatUnits'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
@@ -63,7 +63,7 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),
-  collections: [Illuvials, Pages, Posts, Media, Categories, Users],
+  collections: [Pages, Posts, Media, Categories, Users, CombatUnits],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   plugins: [
