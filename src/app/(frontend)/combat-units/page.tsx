@@ -3,9 +3,10 @@ import type { Metadata } from 'next/types'
 import { getPayload } from 'payload'
 import React from 'react'
 
-import { CollectionArchive } from '@/components/CollectionArchive'
+import { CombatUnitsList } from '@/components/CombatUnits/CombatUnitsList'
 import { PageRange } from '@/components/PageRange'
 import { Pagination } from '@/components/Pagination'
+import { CombatUnit } from '@/payload-types'
 
 import PageClient from './page.client'
 
@@ -15,45 +16,48 @@ export const revalidate = 600
 export default async function Page() {
   const payload = await getPayload({ config: configPromise })
 
-  const posts = await payload.find({
-    collection: 'posts',
+  const combatUnits = await payload.find({
+    collection: 'combat-units',
     depth: 1,
     limit: 12,
     overrideAccess: false,
+    pagination: true,
     select: {
-      title: true,
-      slug: true,
-      categories: true,
-      meta: true,
+      name: true,
+      stage: true,
+      class: true,
+      element: true,
+      data: true,
     },
   })
 
   return (
     <div className={'pt-24 pb-24'}>
       <PageClient />
+
       <div className={'container mb-16'}>
         <div className={'prose dark:prose-invert max-w-none'}>
-          <h1>Posts</h1>
+          <h1>Combat Units</h1>
         </div>
       </div>
 
       <div className={'container mb-8'}>
         <PageRange
-          collection={'posts'}
-          currentPage={posts.page}
+          collection={'combat-units'}
+          currentPage={combatUnits.page}
           limit={12}
-          totalDocs={posts.totalDocs}
+          totalDocs={combatUnits.totalDocs}
         />
       </div>
 
-      <CollectionArchive posts={posts.docs} />
+      <CombatUnitsList units={combatUnits.docs as CombatUnit[]} />
 
       <div className={'container'}>
-        {posts.totalPages > 1 && posts.page && (
+        {combatUnits.totalPages > 1 && combatUnits.page && (
           <Pagination
-            collection={'posts'}
-            page={posts.page}
-            totalPages={posts.totalPages}
+            collection={'combat-units'}
+            page={combatUnits.page}
+            totalPages={combatUnits.totalPages}
           />
         )}
       </div>
@@ -63,6 +67,6 @@ export default async function Page() {
 
 export function generateMetadata(): Metadata {
   return {
-    title: `Payload Website Template Posts`,
+    title: `Illuvilytics - Combat Units`,
   }
 }

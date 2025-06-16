@@ -4,9 +4,10 @@ import type { Metadata } from 'next/types'
 import { getPayload } from 'payload'
 import React from 'react'
 
-import { CollectionArchive } from '@/components/CollectionArchive'
+import { CombatUnitsList } from '@/components/CombatUnits/CombatUnitsList'
 import { PageRange } from '@/components/PageRange'
 import { Pagination } from '@/components/Pagination'
+import { CombatUnit } from '@/payload-types'
 
 import PageClient from './page.client'
 
@@ -26,8 +27,8 @@ export default async function Page({ params: paramsPromise }: Args) {
 
   if (!Number.isInteger(sanitizedPageNumber)) notFound()
 
-  const posts = await payload.find({
-    collection: 'posts',
+  const combatUnits = await payload.find({
+    collection: 'combat-units',
     depth: 1,
     limit: 12,
     page: sanitizedPageNumber,
@@ -37,29 +38,30 @@ export default async function Page({ params: paramsPromise }: Args) {
   return (
     <div className={'pt-24 pb-24'}>
       <PageClient />
+
       <div className={'container mb-16'}>
         <div className={'prose dark:prose-invert max-w-none'}>
-          <h1>Posts</h1>
+          <h1>Combat Units</h1>
         </div>
       </div>
 
       <div className={'container mb-8'}>
         <PageRange
-          collection={'posts'}
-          currentPage={posts.page}
+          collection={'combat-units'}
+          currentPage={combatUnits.page}
           limit={12}
-          totalDocs={posts.totalDocs}
+          totalDocs={combatUnits.totalDocs}
         />
       </div>
 
-      <CollectionArchive posts={posts.docs} />
+      <CombatUnitsList units={combatUnits.docs as CombatUnit[]} />
 
       <div className={'container'}>
-        {posts?.page && posts?.totalPages > 1 && (
+        {combatUnits?.page && combatUnits?.totalPages > 1 && (
           <Pagination
-            collection={'posts'}
-            page={posts.page}
-            totalPages={posts.totalPages}
+            collection={'combat-units'}
+            page={combatUnits.page}
+            totalPages={combatUnits.totalPages}
           />
         )}
       </div>
@@ -73,18 +75,18 @@ export async function generateMetadata({
   const { pageNumber } = await paramsPromise
 
   return {
-    title: `Payload Website Template Posts Page ${pageNumber || ''}`,
+    title: `Illuvilytics - Combat Units Page ${pageNumber || ''}`,
   }
 }
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
   const { totalDocs } = await payload.count({
-    collection: 'posts',
+    collection: 'combat-units',
     overrideAccess: false,
   })
 
-  const totalPages = Math.ceil(totalDocs / 10)
+  const totalPages = Math.ceil(totalDocs / 12)
 
   const pages: { pageNumber: string }[] = []
 

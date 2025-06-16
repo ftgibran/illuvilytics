@@ -15,12 +15,13 @@ import { cn } from '@/utilities/ui'
 
 export const Pagination: React.FC<{
   className?: string
+  collection: string
   page: number
   totalPages: number
 }> = (props) => {
   const router = useRouter()
 
-  const { className, page, totalPages } = props
+  const { className, collection, page, totalPages } = props
   const hasNextPage = page < totalPages
   const hasPrevPage = page > 1
 
@@ -35,7 +36,7 @@ export const Pagination: React.FC<{
             <PaginationPrevious
               disabled={!hasPrevPage}
               onClick={() => {
-                router.push(`/posts/page/${page - 1}`)
+                router.push(`/${collection}/page/${page - 1}`)
               }}
             />
           </PaginationItem>
@@ -50,7 +51,7 @@ export const Pagination: React.FC<{
             <PaginationItem>
               <PaginationLink
                 onClick={() => {
-                  router.push(`/posts/page/${page - 1}`)
+                  router.push(`/${collection}/page/${page - 1}`)
                 }}
               >
                 {page - 1}
@@ -62,7 +63,7 @@ export const Pagination: React.FC<{
             <PaginationLink
               isActive
               onClick={() => {
-                router.push(`/posts/page/${page}`)
+                router.push(`/${collection}/page/${page}`)
               }}
             >
               {page}
@@ -73,7 +74,7 @@ export const Pagination: React.FC<{
             <PaginationItem>
               <PaginationLink
                 onClick={() => {
-                  router.push(`/posts/page/${page + 1}`)
+                  router.push(`/${collection}/page/${page + 1}`)
                 }}
               >
                 {page + 1}
@@ -91,7 +92,7 @@ export const Pagination: React.FC<{
             <PaginationNext
               disabled={!hasNextPage}
               onClick={() => {
-                router.push(`/posts/page/${page + 1}`)
+                router.push(`/${collection}/page/${page + 1}`)
               }}
             />
           </PaginationItem>
