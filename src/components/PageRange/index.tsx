@@ -14,6 +14,18 @@ const defaultCollectionLabels = {
     plural: 'Combat Units',
     singular: 'Combat Unit',
   },
+  weapons: {
+    plural: 'Weapons',
+    singular: 'Weapon',
+  },
+  suits: {
+    plural: 'Suits',
+    singular: 'Suit',
+  },
+  synergies: {
+    plural: 'Synergies',
+    singular: 'Synergy',
+  },
 }
 
 export const PageRange: React.FC<{

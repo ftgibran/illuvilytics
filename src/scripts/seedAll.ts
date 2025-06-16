@@ -5,7 +5,6 @@ import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { buildConfig, getPayload } from 'payload'
 
 import CombatUnits from '@/collections/CombatUnits'
-import DroneAugments from '@/collections/DroneAugments'
 import Suits from '@/collections/Suits'
 import Synergies from '@/collections/Synergies'
 import Weapons from '@/collections/Weapons'
@@ -22,7 +21,7 @@ const seedAll = async () => {
     // Payload configuration
     const payload = await getPayload({
       config: buildConfig({
-        collections: [CombatUnits, DroneAugments, Suits, Synergies, Weapons],
+        collections: [CombatUnits, Suits, Synergies, Weapons],
         db: mongooseAdapter({ url: process.env.DATABASE_URI || '' }),
         secret: process.env.PAYLOAD_SECRET || '',
       }),
