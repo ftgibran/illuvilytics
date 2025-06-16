@@ -5,6 +5,7 @@ import { buildConfig, PayloadRequest } from 'payload'
 import sharp from 'sharp' // sharp-import
 import { fileURLToPath } from 'url'
 
+import Illuvials from '@/collections/Illuvials'
 import { defaultLexical } from '@/fields/defaultLexical'
 
 import { Categories } from './collections/Categories'
@@ -28,7 +29,7 @@ export default buildConfig({
       beforeLogin: ['@/components/BeforeLogin'],
       // The `BeforeDashboard` component renders the 'welcome' block that you see after logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below and the import `BeforeDashboard` statement on line 15.
-      beforeDashboard: ['@/components/BeforeDashboard'],
+      // beforeDashboard: ['@/components/BeforeDashboard'],
     },
     importMap: {
       baseDir: path.resolve(dirname),
@@ -62,7 +63,7 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),
-  collections: [Pages, Posts, Media, Categories, Users],
+  collections: [Illuvials, Pages, Posts, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   plugins: [

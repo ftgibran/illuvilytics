@@ -175,7 +175,7 @@ export const home: (
                 version: 1,
               },
             },
-            size: 'full',
+            size: 'half',
           },
           {
             enableLink: false,
