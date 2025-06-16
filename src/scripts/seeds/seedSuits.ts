@@ -4,7 +4,7 @@ dotenv.config()
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import fs from 'fs'
 import path from 'path'
-import { buildConfig, getPayload } from 'payload'
+import { buildConfig, getPayload, Payload } from 'payload'
 import { fileURLToPath } from 'url'
 
 import Suits from '@/collections/Suits'
@@ -34,23 +34,26 @@ const processSuitData = (data: any) => {
   }
 }
 
-const seedSuits = async () => {
+export const seedSuits = async (payload?: Payload) => {
   try {
-    const payload = await getPayload({
-      config: buildConfig({
-        collections: [Suits],
-        db: mongooseAdapter({ url: process.env.DATABASE_URI || '' }),
-        secret: process.env.PAYLOAD_SECRET || '',
-      }),
-    })
+    // Use provided payload or create a new one
+    const payloadClient =
+      payload ||
+      (await getPayload({
+        config: buildConfig({
+          collections: [Suits],
+          db: mongooseAdapter({ url: process.env.DATABASE_URI || '' }),
+          secret: process.env.PAYLOAD_SECRET || '',
+        }),
+      }))
 
-    const existingSuits = await payload.find({
+    const existingSuits = await payloadClient.find({
       collection: 'suits',
       limit: 1000,
     })
 
     for (const suit of existingSuits.docs) {
-      await payload.delete({
+      await payloadClient.delete({
         collection: 'suits',
         id: suit.id,
       })
@@ -74,7 +77,7 @@ const seedSuits = async () => {
             sourceFile: file,
           })
 
-          await payload.create({
+          await payloadClient.create({
             collection: 'suits',
             data: processedData as never,
           })
@@ -90,11 +93,16 @@ const seedSuits = async () => {
     }
 
     console.log(`Completed! ${processed} suits processed`)
-    process.exit(0)
+
+    if (!payload) process.exit(0) // Only exit if executed directly
   } catch (error) {
     console.error('Error seeding suits:', error)
-    process.exit(1)
+
+    if (!payload) process.exit(1) // Only exit if executed directly
   }
 }
 
-seedSuits()
+// Execute directly if this file is called directly
+if (import.meta.url === `file://${process.argv[1]}`) {
+  seedSuits()
+}

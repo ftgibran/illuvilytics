@@ -4,7 +4,7 @@ dotenv.config()
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import fs from 'fs'
 import path from 'path'
-import { buildConfig, getPayload } from 'payload'
+import { buildConfig, getPayload, Payload } from 'payload'
 import { fileURLToPath } from 'url'
 
 import Synergies from '@/collections/Synergies'
@@ -39,23 +39,26 @@ const processSynergyData = (data: any) => {
   }
 }
 
-const seedSynergies = async () => {
+export const seedSynergies = async (payload?: Payload) => {
   try {
-    const payload = await getPayload({
-      config: buildConfig({
-        collections: [Synergies],
-        db: mongooseAdapter({ url: process.env.DATABASE_URI || '' }),
-        secret: process.env.PAYLOAD_SECRET || '',
-      }),
-    })
+    // Use provided payload or create a new one
+    const payloadClient =
+      payload ||
+      (await getPayload({
+        config: buildConfig({
+          collections: [Synergies],
+          db: mongooseAdapter({ url: process.env.DATABASE_URI || '' }),
+          secret: process.env.PAYLOAD_SECRET || '',
+        }),
+      }))
 
-    const existingSynergies = await payload.find({
+    const existingSynergies = await payloadClient.find({
       collection: 'synergies',
       limit: 1000,
     })
 
     for (const synergy of existingSynergies.docs) {
-      await payload.delete({
+      await payloadClient.delete({
         collection: 'synergies',
         id: synergy.id,
       })
@@ -79,7 +82,7 @@ const seedSynergies = async () => {
             sourceFile: file,
           })
 
-          await payload.create({
+          await payloadClient.create({
             collection: 'synergies',
             data: processedData as never,
           })
@@ -95,11 +98,16 @@ const seedSynergies = async () => {
     }
 
     console.log(`Completed! ${processed} synergies processed`)
-    process.exit(0)
+
+    if (!payload) process.exit(0) // Only exit if executed directly
   } catch (error) {
     console.error('Error seeding synergies:', error)
-    process.exit(1)
+
+    if (!payload) process.exit(1) // Only exit if executed directly
   }
 }
 
-seedSynergies()
+// Execute directly if this file is called directly
+if (import.meta.url === `file://${process.argv[1]}`) {
+  seedSynergies()
+}

@@ -4,7 +4,7 @@ dotenv.config()
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import fs from 'fs'
 import path from 'path'
-import { buildConfig, getPayload } from 'payload'
+import { buildConfig, getPayload, Payload } from 'payload'
 import { fileURLToPath } from 'url'
 
 import Weapons from '@/collections/Weapons'
@@ -57,23 +57,26 @@ const processWeaponData = (data: any) => {
   }
 }
 
-const seedWeapons = async () => {
+export const seedWeapons = async (payload?: Payload) => {
   try {
-    const payload = await getPayload({
-      config: buildConfig({
-        collections: [Weapons],
-        db: mongooseAdapter({ url: process.env.DATABASE_URI || '' }),
-        secret: process.env.PAYLOAD_SECRET || '',
-      }),
-    })
+    // Use provided payload or create a new one
+    const payloadClient =
+      payload ||
+      (await getPayload({
+        config: buildConfig({
+          collections: [Weapons],
+          db: mongooseAdapter({ url: process.env.DATABASE_URI || '' }),
+          secret: process.env.PAYLOAD_SECRET || '',
+        }),
+      }))
 
-    const existingWeapons = await payload.find({
+    const existingWeapons = await payloadClient.find({
       collection: 'weapons',
       limit: 1000,
     })
 
     for (const weapon of existingWeapons.docs) {
-      await payload.delete({
+      await payloadClient.delete({
         collection: 'weapons',
         id: weapon.id,
       })
@@ -97,7 +100,7 @@ const seedWeapons = async () => {
             sourceFile: file,
           })
 
-          await payload.create({
+          await payloadClient.create({
             collection: 'weapons',
             data: processedData as never,
           })
@@ -113,11 +116,16 @@ const seedWeapons = async () => {
     }
 
     console.log(`Completed! ${processed} weapons processed`)
-    process.exit(0)
+
+    if (!payload) process.exit(0) // Only exit if executed directly
   } catch (error) {
     console.error('Error seeding weapons:', error)
-    process.exit(1)
+
+    if (!payload) process.exit(1) // Only exit if executed directly
   }
 }
 
-seedWeapons()
+// Execute directly if this file is called directly
+if (import.meta.url === `file://${process.argv[1]}`) {
+  seedWeapons()
+}

@@ -4,7 +4,7 @@ dotenv.config()
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import fs from 'fs'
 import path from 'path'
-import { buildConfig, getPayload } from 'payload'
+import { buildConfig, getPayload, Payload } from 'payload'
 import { fileURLToPath } from 'url'
 
 import CombatUnits from '@/collections/CombatUnits'
@@ -54,23 +54,26 @@ const processCombatUnitData = (data: any) => {
   }
 }
 
-const seedCombatUnits = async () => {
+export const seedCombatUnits = async (payload?: Payload) => {
   try {
-    const payload = await getPayload({
-      config: buildConfig({
-        collections: [CombatUnits],
-        db: mongooseAdapter({ url: process.env.DATABASE_URI || '' }),
-        secret: process.env.PAYLOAD_SECRET || '',
-      }),
-    })
+    // Use provided payload or create a new one
+    const payloadClient =
+      payload ||
+      (await getPayload({
+        config: buildConfig({
+          collections: [CombatUnits],
+          db: mongooseAdapter({ url: process.env.DATABASE_URI || '' }),
+          secret: process.env.PAYLOAD_SECRET || '',
+        }),
+      }))
 
-    const existingUnits = await payload.find({
+    const existingUnits = await payloadClient.find({
       collection: 'combat-units',
       limit: 1000,
     })
 
     for (const unit of existingUnits.docs) {
-      await payload.delete({
+      await payloadClient.delete({
         collection: 'combat-units',
         id: unit.id,
       })
@@ -94,7 +97,7 @@ const seedCombatUnits = async () => {
             sourceFile: file,
           })
 
-          await payload.create({
+          await payloadClient.create({
             collection: 'combat-units',
             data: processedData as never,
           })
@@ -110,11 +113,16 @@ const seedCombatUnits = async () => {
     }
 
     console.log(`Completed! ${processed} combat units processed`)
-    process.exit(0)
+
+    if (!payload) process.exit(0) // Only exit if executed directly
   } catch (error) {
     console.error('Error seeding combat units:', error)
-    process.exit(1)
+
+    if (!payload) process.exit(1) // Only exit if executed directly
   }
 }
 
-seedCombatUnits()
+// Execute directly if this file is called directly
+if (import.meta.url === `file://${process.argv[1]}`) {
+  seedCombatUnits()
+}
