@@ -17,6 +17,7 @@ const compat = new FlatCompat({
 
 const eslintConfig = defineConfig([
   pluginReact.configs.flat.recommended,
+  ...compat.extends('next/core-web-vitals', 'next/typescript'),
   {
     plugins: {
       js,
@@ -27,7 +28,7 @@ const eslintConfig = defineConfig([
     rules: {
       '@typescript-eslint/ban-ts-comment': 'warn',
       '@typescript-eslint/no-empty-object-type': 'warn',
-      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-unused-vars': [
         'warn',
         {
@@ -68,6 +69,7 @@ const eslintConfig = defineConfig([
         { blankLine: 'always', prev: 'if', next: '*' },
       ],
 
+      'no-unused-vars': 'off',
       'react/react-in-jsx-scope': 'off',
       'react/self-closing-comp': ['error', { component: true, html: true }],
       'react/jsx-curly-brace-presence': [
@@ -76,7 +78,6 @@ const eslintConfig = defineConfig([
       ],
     },
   },
-  ...compat.extends('next/core-web-vitals', 'next/typescript'),
   eslintConfigPrettier,
   {
     ignores: ['.next/', 'src/app/(payload)/admin/importMap.js'],

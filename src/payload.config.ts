@@ -12,7 +12,10 @@ import { CombatUnits } from './collections/CombatUnits'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
+import { Suits } from './collections/Suits'
+import { Synergies } from './collections/Synergies'
 import { Users } from './collections/Users'
+import { Weapons } from './collections/Weapons'
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
 import { plugins } from './plugins'
@@ -63,7 +66,17 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),
-  collections: [Pages, Posts, Media, Categories, Users, CombatUnits],
+  collections: [
+    Pages,
+    Posts,
+    Media,
+    Categories,
+    Users,
+    CombatUnits,
+    Suits,
+    Synergies,
+    Weapons,
+  ],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   plugins: [

@@ -73,6 +73,9 @@ export interface Config {
     categories: Category;
     users: User;
     'combat-units': CombatUnit;
+    suits: Suit;
+    synergies: Synergy;
+    weapons: Weapon;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -90,6 +93,9 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'combat-units': CombatUnitsSelect<false> | CombatUnitsSelect<true>;
+    suits: SuitsSelect<false> | SuitsSelect<true>;
+    synergies: SynergiesSelect<false> | SynergiesSelect<true>;
+    weapons: WeaponsSelect<false> | WeaponsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -810,6 +816,179 @@ export interface CombatUnit {
   createdAt: string;
 }
 /**
+ * Suits available in the game
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "suits".
+ */
+export interface Suit {
+  id: string;
+  /**
+   * Name of the suit
+   */
+  name: string;
+  /**
+   * Type of suit
+   */
+  type: string;
+  /**
+   * Variation of the suit
+   */
+  variation: string;
+  /**
+   * Tier of the suit
+   */
+  tier: number;
+  /**
+   * Display name of the suit
+   */
+  displayName?: string | null;
+  /**
+   * Display description of the suit
+   */
+  displayDescription?: string | null;
+  /**
+   * Original JSON file name
+   */
+  sourceFile?: string | null;
+  /**
+   * Complete suit data from source file
+   */
+  data?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Synergies available in the game
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "synergies".
+ */
+export interface Synergy {
+  id: string;
+  /**
+   * Name of the synergy
+   */
+  name: string;
+  /**
+   * Type of synergy
+   */
+  type: string;
+  /**
+   * Tier of the synergy
+   */
+  tier: number;
+  /**
+   * Description of the synergy
+   */
+  description?: string | null;
+  /**
+   * Number of units required for the synergy
+   */
+  requiredUnits?: number | null;
+  /**
+   * Effects of the synergy
+   */
+  effects?:
+    | {
+        /**
+         * Name of the effect
+         */
+        name?: string | null;
+        /**
+         * Description of the effect
+         */
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Original JSON file name
+   */
+  sourceFile?: string | null;
+  /**
+   * Complete synergy data from source file
+   */
+  data?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Weapons available in the game
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "weapons".
+ */
+export interface Weapon {
+  id: string;
+  /**
+   * Name of the weapon
+   */
+  name: string;
+  /**
+   * Type of weapon
+   */
+  type: string;
+  /**
+   * Weapon class
+   */
+  class: 'None' | 'Fighter' | 'Rogue' | 'Bulwark' | 'Psion' | 'Empath';
+  /**
+   * Weapon element
+   */
+  element: 'None' | 'Water' | 'Earth' | 'Fire' | 'Nature' | 'Air';
+  /**
+   * Tier of the weapon
+   */
+  tier: number;
+  /**
+   * Variation of the weapon
+   */
+  variation?: string | null;
+  /**
+   * Display name of the weapon
+   */
+  displayName?: string | null;
+  /**
+   * Display description of the weapon
+   */
+  displayDescription?: string | null;
+  /**
+   * Original JSON file name
+   */
+  sourceFile?: string | null;
+  /**
+   * Complete weapon data from source file
+   */
+  data?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
@@ -1005,6 +1184,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'combat-units';
         value: string | CombatUnit;
+      } | null)
+    | ({
+        relationTo: 'suits';
+        value: string | Suit;
+      } | null)
+    | ({
+        relationTo: 'synergies';
+        value: string | Synergy;
+      } | null)
+    | ({
+        relationTo: 'weapons';
+        value: string | Weapon;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1386,6 +1577,62 @@ export interface CombatUnitsSelect<T extends boolean = true> {
   stage?: T;
   class?: T;
   element?: T;
+  sourceFile?: T;
+  data?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "suits_select".
+ */
+export interface SuitsSelect<T extends boolean = true> {
+  name?: T;
+  type?: T;
+  variation?: T;
+  tier?: T;
+  displayName?: T;
+  displayDescription?: T;
+  sourceFile?: T;
+  data?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "synergies_select".
+ */
+export interface SynergiesSelect<T extends boolean = true> {
+  name?: T;
+  type?: T;
+  tier?: T;
+  description?: T;
+  requiredUnits?: T;
+  effects?:
+    | T
+    | {
+        name?: T;
+        description?: T;
+        id?: T;
+      };
+  sourceFile?: T;
+  data?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "weapons_select".
+ */
+export interface WeaponsSelect<T extends boolean = true> {
+  name?: T;
+  type?: T;
+  class?: T;
+  element?: T;
+  tier?: T;
+  variation?: T;
+  displayName?: T;
+  displayDescription?: T;
   sourceFile?: T;
   data?: T;
   updatedAt?: T;
