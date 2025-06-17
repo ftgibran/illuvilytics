@@ -1,16 +1,14 @@
 import React, { useCallback } from 'react'
 
-import { CMSLink } from '@/components/Link'
 import RichText from '@/components/RichText'
-import type { ContentBlock as ContentBlockProps } from '@/payload-types'
+import type { SectionBlock as SectionBlockProps } from '@/payload-types'
 import { cn } from '@/utilities/ui'
 
-export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
-  const { columns, centralized, multipleColumns, content, enableLink, link } =
-    props
+export const SectionBlock: React.FC<SectionBlockProps> = (props) => {
+  const { columns, multipleColumns, content } = props
 
   return (
-    <div className={'container my-16'}>
+    <section className={'container'}>
       {multipleColumns ? (
         <div className={'grid grid-cols-4 lg:grid-cols-12 gap-y-8 gap-x-16'}>
           {columns?.map((props, index) => (
@@ -18,39 +16,24 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
               key={index}
               index={index}
               length={columns.length}
-              centralized={centralized}
               {...props}
             />
           ))}
         </div>
       ) : (
-        <Display
-          enableLink={enableLink}
-          link={link}
-          content={content}
-          centralized={centralized}
-        />
+        <Display content={content} />
       )}
-    </div>
+    </section>
   )
 }
 
-type DisplayProps = NonNullable<ContentBlockProps['columns']>[number] & {
-  centralized?: boolean | null
+type DisplayProps = NonNullable<SectionBlockProps['columns']>[number] & {
   index?: number
   length?: number
 }
 
 const Display = (props: DisplayProps) => {
-  const {
-    enableLink,
-    link,
-    content,
-    size,
-    centralized,
-    index = 0,
-    length = 1,
-  } = props
+  const { content, size, index = 0, length = 1 } = props
 
   const isSize = useCallback(
     (current: typeof size, centralized?: boolean) =>
@@ -63,14 +46,7 @@ const Display = (props: DisplayProps) => {
   return (
     <div
       className={cn(
-        {
-          'col-span-4': size,
-          flex: centralized,
-          'flex-col': centralized,
-          'items-stretch': !centralized,
-          'items-center': centralized,
-          'text-center': centralized,
-        },
+        { 'col-span-4': size },
         {
           'lg:col-span-4': isSize('oneThird'),
           'lg:col-start-5': isSize('oneThird', true) && length === 1 && !index,
@@ -86,21 +62,7 @@ const Display = (props: DisplayProps) => {
         },
       )}
     >
-      {content && (
-        <RichText
-          data={content}
-          enableGutter={false}
-          className={cn({
-            flex: centralized,
-            'flex-col': centralized,
-            'items-stretch': !centralized,
-            'items-center': centralized,
-            'text-center': centralized,
-          })}
-        />
-      )}
-
-      {enableLink && <CMSLink {...link} />}
+      {content && <RichText data={content} enableGutter={false} />}
     </div>
   )
 }

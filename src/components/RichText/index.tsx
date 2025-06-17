@@ -13,7 +13,10 @@ import { HTMLAttributes } from 'react'
 
 import { BannerBlock } from '@/blocks/Banner/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
+import { CardBlock } from '@/blocks/Card/Component'
 import { CodeBlock, CodeBlockProps } from '@/blocks/Code/Component'
+import { ContainerBlock } from '@/blocks/Container/Component'
+import { GridBlock } from '@/blocks/Grid/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import type {
   BannerBlock as BannerBlockProps,
@@ -46,13 +49,22 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({
   ...defaultConverters,
   ...LinkJSXConverter({ internalDocToHref }),
   blocks: {
+    container: ({ node }: any) => (
+      <ContainerBlock className={'col-start-1'} {...node.fields} />
+    ),
+    grid: ({ node }: any) => (
+      <GridBlock className={'col-start-1'} {...node.fields} />
+    ),
+    card: ({ node }: any) => (
+      <CardBlock className={'col-start-1'} {...node.fields} />
+    ),
     banner: ({ node }) => (
       <BannerBlock className={'col-start-2 mb-4'} {...node.fields} />
     ),
     mediaBlock: ({ node }) => (
       <MediaBlock
-        className={'col-start-1 col-span-3'}
-        imgClassName={'m-0'}
+        className={'col-start-1 col-span-3 my-0'}
+        imgClassName={'mx-auto my-0'}
         {...node.fields}
         captionClassName={'mx-auto max-w-[48rem]'}
         enableGutter={false}

@@ -5,6 +5,7 @@ interface Props {
   className?: string
   loading?: 'lazy' | 'eager'
   priority?: 'auto' | 'high' | 'low'
+  isMonochromatic?: boolean
 }
 
 export const Logo = (props: Props) => {
@@ -12,6 +13,7 @@ export const Logo = (props: Props) => {
     loading: loadingFromProps,
     priority: priorityFromProps,
     className,
+    isMonochromatic,
   } = props
 
   const loading = loadingFromProps || 'lazy'
@@ -19,17 +21,20 @@ export const Logo = (props: Props) => {
 
   return (
     /* eslint-disable @next/next/no-img-element */
-    <img
-      alt={'Payload Logo'}
-      width={193}
-      height={34}
-      loading={loading}
-      fetchPriority={priority}
-      decoding={'async'}
-      className={clsx('max-w-[9.375rem] w-full h-[34px]', className)}
-      src={
-        'https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-logo-light.svg'
-      }
-    />
+    <div className={'flex flex-row gap-0 items-center'}>
+      <img
+        alt={'Payload Logo'}
+        width={193}
+        height={34}
+        loading={loading}
+        fetchPriority={priority}
+        className={clsx('w-full h-16', className)}
+        src={isMonochromatic ? '/logo-white.webp' : '/logo.webp'}
+      />
+
+      <span className={'text-2xl font-bold tracking-widest text-white'}>
+        Illuvilytics
+      </span>
+    </div>
   )
 }

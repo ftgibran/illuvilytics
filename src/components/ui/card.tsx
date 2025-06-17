@@ -7,7 +7,7 @@ const Card: React.FC<
 > = ({ className, ref, ...props }) => (
   <div
     className={cn(
-      'rounded-lg border bg-card text-card-foreground shadow-sm',
+      'rounded-xl bg-card text-card-foreground shadow-sm',
       className,
     )}
     ref={ref}
@@ -19,7 +19,7 @@ const CardHeader: React.FC<
   { ref?: React.Ref<HTMLDivElement> } & React.HTMLAttributes<HTMLDivElement>
 > = ({ className, ref, ...props }) => (
   <div
-    className={cn('flex flex-col space-y-1.5 p-6', className)}
+    className={cn('flex flex-col leading-snug text-light-blue p-2', className)}
     ref={ref}
     {...props}
   />
@@ -32,7 +32,7 @@ const CardTitle: React.FC<
 > = ({ className, ref, ...props }) => (
   <h3
     className={cn(
-      'text-2xl font-semibold leading-none tracking-tight',
+      'text-2xl mt-2 font-bold leading-none tracking-tight',
       className,
     )}
     ref={ref}
@@ -62,7 +62,7 @@ const CardFooter: React.FC<
   { ref?: React.Ref<HTMLDivElement> } & React.HTMLAttributes<HTMLDivElement>
 > = ({ className, ref, ...props }) => (
   <div
-    className={cn('flex items-center p-6 pt-0', className)}
+    className={cn('flex justify-center pb-2', className)}
     ref={ref}
     {...props}
   />

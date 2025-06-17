@@ -1,7 +1,6 @@
 import typography from '@tailwindcss/typography'
 import tailwindcssAnimate from 'tailwindcss-animate'
 
-/** @type {import('tailwindcss').Config} */
 const config = {
   content: [
     './pages/**/*.{ts,tsx}',
@@ -9,7 +8,6 @@ const config = {
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
   ],
-  darkMode: ['selector', '[data-theme="dark"]'],
   plugins: [tailwindcssAnimate, typography],
   prefix: '',
   safelist: [
@@ -17,6 +15,18 @@ const config = {
     'lg:col-span-6',
     'lg:col-span-8',
     'lg:col-span-12',
+    'lg:grid-cols-1',
+    'lg:grid-cols-2',
+    'lg:grid-cols-3',
+    'lg:grid-cols-4',
+    'lg:grid-cols-5',
+    'lg:grid-cols-6',
+    'lg:grid-cols-7',
+    'lg:grid-cols-8',
+    'lg:grid-cols-9',
+    'lg:grid-cols-10',
+    'lg:grid-cols-11',
+    'lg:grid-cols-12',
     'border-border',
     'bg-card',
     'border-error',
@@ -60,6 +70,9 @@ const config = {
           DEFAULT: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))',
         },
+        lilac: 'var(--lilac)',
+        ['light-blue']: 'var(--light-blue)',
+        ['blue-border']: 'var(--blue-border)',
         background: 'hsl(var(--background))',
         border: 'hsla(var(--border))',
         card: {
@@ -114,8 +127,12 @@ const config = {
               '--tw-prose-body': 'var(--text)',
               '--tw-prose-headings': 'var(--text)',
               h1: {
-                fontWeight: 'normal',
+                fontWeight: 'bold',
                 marginBottom: '0.25em',
+              },
+              p: {
+                fontSize: '1rem',
+                lineHeight: '1.6',
               },
             },
           ],
@@ -125,6 +142,7 @@ const config = {
             {
               h1: {
                 fontSize: '2.5rem',
+                fontWeight: 600,
               },
               h2: {
                 fontSize: '1.25rem',
@@ -138,9 +156,11 @@ const config = {
             {
               h1: {
                 fontSize: '3.5rem',
+                fontWeight: 600,
               },
               h2: {
-                fontSize: '1.5rem',
+                fontSize: '2.75rem',
+                fontWeight: 600,
               },
             },
           ],

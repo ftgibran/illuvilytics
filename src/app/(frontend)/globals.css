@@ -16,48 +16,12 @@
   }
 
   :root {
-    --background: 0 0% 100%;
-    --foreground: 271 78% 19%; /* primary.500 */
-
-    --card: 240 5% 96%;
-    --card-foreground: 271 78% 19%; /* primary.500 */
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 271 78% 19%; /* primary.500 */
-
-    --primary: 267 88% 57%; /* primary.300 */
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 248 41% 19%; /* secondary.500 */
-    --secondary-foreground: 0 0% 100%;
-
-    --muted: 267 28% 94%; /* light primary */
-    --muted-foreground: 271 78% 19%; /* primary.500 */
-
-    --accent: 271 89% 69%; /* common.purple */
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 60% 50%; /* danger.500 */
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 248 41% 19%; /* secondary.500 */
-    --input: 267 88% 57%; /* primary.300 */
-    --ring: 271 89% 69%; /* common.purple */
-
-    --radius: 0.2rem;
-
-    --success: 120 70% 45%; /* success.500 */
-    --warning: 45 100% 50%; /* warning.500 */
-    --error: 0 60% 50%; /* danger.500 */;
-  }
-
-  [data-theme='dark'] {
     --font-mulish: 'Mulish', sans-serif;
 
     --background: 250 35% 11%; /* secondary.800 */
     --foreground: 0 0% 100%;
 
-    --card: 248 41% 19%; /* secondary.500 */
+    --card: 248 42% 15%; /* secondary.600 */
     --card-foreground: 0 0% 100%;
 
     --popover: 250 35% 11%; /* secondary.800 */
@@ -75,12 +39,18 @@
     --accent: 271 89% 69%; /* common.purple */
     --accent-foreground: 0 0% 100%;
 
+    --lilac: #babaff;
+    --light-blue: #7f7fbe;
+    --blue-border: #25214f;
+
     --destructive: 0 60% 50%; /* danger.500 */
     --destructive-foreground: 0 0% 100%;
 
     --border: 248 41% 19%; /* secondary.500 */
     --input: 267 88% 57%; /* primary.300 */
     --ring: 271 89% 69%; /* common.purple */
+
+    --radius: 0.2rem;
 
     --success: 120 70% 45%; /* success.500 */
     --warning: 45 100% 50%; /* warning.500 */
@@ -96,13 +66,4 @@
   body {
     @apply bg-background text-foreground min-h-[100vh] flex flex-col;
   }
-}
-
-html {
-  opacity: 0;
-}
-
-html[data-theme='dark'],
-html[data-theme='light'] {
-  opacity: initial;
 }

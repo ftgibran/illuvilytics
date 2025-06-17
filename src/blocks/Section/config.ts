@@ -8,11 +8,13 @@ import {
 import type { Block, Field } from 'payload'
 
 import { Banner } from '@/blocks/Banner/config'
+import { Card } from '@/blocks/Card/config'
 import { Code } from '@/blocks/Code/config'
+import { Container } from '@/blocks/Container/config'
+import { Grid } from '@/blocks/Grid/config'
 import { MediaBlock } from '@/blocks/MediaBlock/config'
-import { link } from '@/fields/link'
 
-export const contentFields: Field[] = [
+const contentFields: Field[] = [
   {
     name: 'content',
     type: 'richText',
@@ -25,48 +27,28 @@ export const contentFields: Field[] = [
     editor: lexicalEditor({
       features: ({ defaultFeatures }) => [
         ...defaultFeatures,
-        HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
+        HeadingFeature(),
         FixedToolbarFeature(),
         InlineToolbarFeature(),
 
         BlocksFeature({
-          blocks: [Banner, Code, MediaBlock],
+          blocks: [Container, Grid, Card, MediaBlock, Banner, Code],
         }),
       ],
     }),
   },
-  {
-    name: 'enableLink',
-    type: 'checkbox',
-    admin: {
-      condition: (_data, siblingData) => {
-        return !siblingData?.multipleColumns
-      },
-    },
-  },
-  link({
-    overrides: {
-      admin: {
-        condition: (_data, siblingData) => {
-          return Boolean(siblingData?.enableLink)
-        },
-      },
-    },
-  }),
 ]
 
-export const Content: Block = {
-  slug: 'content',
-  interfaceName: 'ContentBlock',
+export const Section: Block = {
+  slug: 'section',
+  interfaceName: 'SectionBlock',
   fields: [
-    { name: 'centralized', type: 'checkbox', defaultValue: true },
     ...contentFields,
     { name: 'multipleColumns', type: 'checkbox' },
     {
       name: 'columns',
       type: 'array',
       admin: {
-        initCollapsed: true,
         condition: (_data, siblingData) => {
           return Boolean(siblingData?.multipleColumns)
         },
