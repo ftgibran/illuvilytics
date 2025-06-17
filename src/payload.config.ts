@@ -5,6 +5,7 @@ import { buildConfig, PayloadRequest } from 'payload'
 import sharp from 'sharp' // sharp-import
 import { fileURLToPath } from 'url'
 
+import { Faq } from '@/collections/Faq'
 import { defaultLexical } from '@/fields/defaultLexical'
 
 import { Categories } from './collections/Categories'
@@ -76,6 +77,7 @@ export default buildConfig({
     Suits,
     Synergies,
     Weapons,
+    Faq,
   ],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],

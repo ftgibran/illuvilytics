@@ -5,11 +5,13 @@ import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { buildConfig, getPayload } from 'payload'
 
 import CombatUnits from '@/collections/CombatUnits'
+import { Faq } from '@/collections/Faq'
 import Suits from '@/collections/Suits'
 import Synergies from '@/collections/Synergies'
 import Weapons from '@/collections/Weapons'
 
 import { seedCombatUnits } from './seeds/seedCombatUnits'
+import { seedFAQ } from './seeds/seedFAQ'
 import { seedSuits } from './seeds/seedSuits'
 import { seedSynergies } from './seeds/seedSynergies'
 import { seedWeapons } from './seeds/seedWeapons'
@@ -21,7 +23,7 @@ const seedAll = async () => {
     // Payload configuration
     const payload = await getPayload({
       config: buildConfig({
-        collections: [CombatUnits, Suits, Synergies, Weapons],
+        collections: [CombatUnits, Suits, Synergies, Weapons, Faq],
         db: mongooseAdapter({ url: process.env.DATABASE_URI || '' }),
         secret: process.env.PAYLOAD_SECRET || '',
       }),
@@ -39,6 +41,9 @@ const seedAll = async () => {
 
     console.log('\n=== Running Weapons seed ===')
     await seedWeapons(payload)
+
+    console.log('\n=== Running FAQ seed ===')
+    await seedFAQ(payload)
 
     console.log('\n✅ Complete seed process finished successfully!')
     process.exit(0)
