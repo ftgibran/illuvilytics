@@ -1,25 +1,13 @@
 import dotenv from 'dotenv'
 dotenv.config()
 
-import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import fs from 'fs'
 import path from 'path'
-import { buildConfig, getPayload, Payload } from 'payload'
-import { fileURLToPath } from 'url'
+import { Payload } from 'payload'
 
-import Weapons from '@/collections/Weapons'
+import { getDirname, readJsonFile } from '../utils/fileUtils'
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-
-const readJsonFile = (filePath: string) => {
-  try {
-    return JSON.parse(fs.readFileSync(filePath, 'utf-8'))
-  } catch (error) {
-    console.error(`Error reading file ${filePath}:`, error)
-
-    return null
-  }
-}
+const __dirname = getDirname(import.meta.url)
 
 const processWeaponData = (data: any) => {
   const validateOption = (
@@ -57,26 +45,15 @@ const processWeaponData = (data: any) => {
   }
 }
 
-export const seedWeapons = async (payload?: Payload) => {
+export const seedWeapons = async (payload: Payload) => {
   try {
-    // Use provided payload or create a new one
-    const payloadClient =
-      payload ||
-      (await getPayload({
-        config: buildConfig({
-          collections: [Weapons],
-          db: mongooseAdapter({ url: process.env.DATABASE_URI || '' }),
-          secret: process.env.PAYLOAD_SECRET || '',
-        }),
-      }))
-
-    const existingWeapons = await payloadClient.find({
+    const existingWeapons = await payload.find({
       collection: 'weapons',
       limit: 1000,
     })
 
     for (const weapon of existingWeapons.docs) {
-      await payloadClient.delete({
+      await payload.delete({
         collection: 'weapons',
         id: weapon.id,
       })
@@ -88,10 +65,8 @@ export const seedWeapons = async (payload?: Payload) => {
       .filter((file) => file.endsWith('.json'))
     let processed = 0
 
-    console.log(`Processing ${jsonFiles.length} weapons...`)
-
     for (const file of jsonFiles) {
-      const data = readJsonFile(path.join(dataDir, file))
+      const data = readJsonFile(path.join(dataDir, file), payload)
 
       if (data) {
         try {
@@ -100,26 +75,23 @@ export const seedWeapons = async (payload?: Payload) => {
             sourceFile: file,
           })
 
-          await payloadClient.create({
+          await payload.create({
             collection: 'weapons',
             data: processedData as never,
           })
-          processed++
 
-          if (processed % 10 === 0) {
-            console.log(`Progress: ${processed}/${jsonFiles.length}`)
-          }
+          processed++
         } catch (error: any) {
-          console.error(`Error processing ${file}:`, error.message)
+          payload.logger.error(`Error processing ${file}:`, error.message)
         }
       }
     }
 
-    console.log(`Completed! ${processed} weapons processed`)
+    payload.logger.info(`Completed! ${processed} weapons processed`)
 
     if (!payload) process.exit(0) // Only exit if executed directly
   } catch (error) {
-    console.error('Error seeding weapons:', error)
+    payload.logger.error('Error seeding weapons:', error)
 
     if (!payload) process.exit(1) // Only exit if executed directly
   }

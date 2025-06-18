@@ -1,25 +1,13 @@
 import dotenv from 'dotenv'
 dotenv.config()
 
-import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import fs from 'fs'
 import path from 'path'
-import { buildConfig, getPayload, Payload } from 'payload'
-import { fileURLToPath } from 'url'
+import { Payload } from 'payload'
 
-import Suits from '@/collections/Suits'
+import { getDirname, readJsonFile } from '../utils/fileUtils'
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-
-const readJsonFile = (filePath: string) => {
-  try {
-    return JSON.parse(fs.readFileSync(filePath, 'utf-8'))
-  } catch (error) {
-    console.error(`Error reading file ${filePath}:`, error)
-
-    return null
-  }
-}
+const __dirname = getDirname(import.meta.url)
 
 const processSuitData = (data: any) => {
   return {
@@ -34,26 +22,15 @@ const processSuitData = (data: any) => {
   }
 }
 
-export const seedSuits = async (payload?: Payload) => {
+export const seedSuits = async (payload: Payload) => {
   try {
-    // Use provided payload or create a new one
-    const payloadClient =
-      payload ||
-      (await getPayload({
-        config: buildConfig({
-          collections: [Suits],
-          db: mongooseAdapter({ url: process.env.DATABASE_URI || '' }),
-          secret: process.env.PAYLOAD_SECRET || '',
-        }),
-      }))
-
-    const existingSuits = await payloadClient.find({
+    const existingSuits = await payload.find({
       collection: 'suits',
       limit: 1000,
     })
 
     for (const suit of existingSuits.docs) {
-      await payloadClient.delete({
+      await payload.delete({
         collection: 'suits',
         id: suit.id,
       })
@@ -65,10 +42,8 @@ export const seedSuits = async (payload?: Payload) => {
       .filter((file) => file.endsWith('.json'))
     let processed = 0
 
-    console.log(`Processing ${jsonFiles.length} suits...`)
-
     for (const file of jsonFiles) {
-      const data = readJsonFile(path.join(dataDir, file))
+      const data = readJsonFile(path.join(dataDir, file), payload)
 
       if (data) {
         try {
@@ -77,26 +52,23 @@ export const seedSuits = async (payload?: Payload) => {
             sourceFile: file,
           })
 
-          await payloadClient.create({
+          await payload.create({
             collection: 'suits',
             data: processedData as never,
           })
-          processed++
 
-          if (processed % 10 === 0) {
-            console.log(`Progress: ${processed}/${jsonFiles.length}`)
-          }
+          processed++
         } catch (error: any) {
-          console.error(`Error processing ${file}:`, error.message)
+          payload.logger.error(`Error processing ${file}:`, error.message)
         }
       }
     }
 
-    console.log(`Completed! ${processed} suits processed`)
+    payload.logger.info(`Completed! ${processed} suits processed`)
 
     if (!payload) process.exit(0) // Only exit if executed directly
   } catch (error) {
-    console.error('Error seeding suits:', error)
+    payload.logger.error('Error seeding suits:', error)
 
     if (!payload) process.exit(1) // Only exit if executed directly
   }

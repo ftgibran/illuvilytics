@@ -1,25 +1,13 @@
 import dotenv from 'dotenv'
 dotenv.config()
 
-import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import fs from 'fs'
 import path from 'path'
-import { buildConfig, getPayload, Payload } from 'payload'
-import { fileURLToPath } from 'url'
+import { Payload } from 'payload'
 
-import Synergies from '@/collections/Synergies'
+import { getDirname, readJsonFile } from '../utils/fileUtils'
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-
-const readJsonFile = (filePath: string) => {
-  try {
-    return JSON.parse(fs.readFileSync(filePath, 'utf-8'))
-  } catch (error) {
-    console.error(`Error reading file ${filePath}:`, error)
-
-    return null
-  }
-}
+const __dirname = getDirname(import.meta.url)
 
 const processSynergyData = (data: any) => {
   return {
@@ -39,26 +27,15 @@ const processSynergyData = (data: any) => {
   }
 }
 
-export const seedSynergies = async (payload?: Payload) => {
+export const seedSynergies = async (payload: Payload) => {
   try {
-    // Use provided payload or create a new one
-    const payloadClient =
-      payload ||
-      (await getPayload({
-        config: buildConfig({
-          collections: [Synergies],
-          db: mongooseAdapter({ url: process.env.DATABASE_URI || '' }),
-          secret: process.env.PAYLOAD_SECRET || '',
-        }),
-      }))
-
-    const existingSynergies = await payloadClient.find({
+    const existingSynergies = await payload.find({
       collection: 'synergies',
       limit: 1000,
     })
 
     for (const synergy of existingSynergies.docs) {
-      await payloadClient.delete({
+      await payload.delete({
         collection: 'synergies',
         id: synergy.id,
       })
@@ -70,10 +47,8 @@ export const seedSynergies = async (payload?: Payload) => {
       .filter((file) => file.endsWith('.json'))
     let processed = 0
 
-    console.log(`Processing ${jsonFiles.length} synergies...`)
-
     for (const file of jsonFiles) {
-      const data = readJsonFile(path.join(dataDir, file))
+      const data = readJsonFile(path.join(dataDir, file), payload)
 
       if (data) {
         try {
@@ -82,26 +57,23 @@ export const seedSynergies = async (payload?: Payload) => {
             sourceFile: file,
           })
 
-          await payloadClient.create({
+          await payload.create({
             collection: 'synergies',
             data: processedData as never,
           })
-          processed++
 
-          if (processed % 10 === 0) {
-            console.log(`Progress: ${processed}/${jsonFiles.length}`)
-          }
+          processed++
         } catch (error: any) {
-          console.error(`Error processing ${file}:`, error.message)
+          payload.logger.error(`Error processing ${file}:`, error.message)
         }
       }
     }
 
-    console.log(`Completed! ${processed} synergies processed`)
+    payload.logger.info(`Completed! ${processed} synergies processed`)
 
     if (!payload) process.exit(0) // Only exit if executed directly
   } catch (error) {
-    console.error('Error seeding synergies:', error)
+    payload.logger.error('Error seeding synergies:', error)
 
     if (!payload) process.exit(1) // Only exit if executed directly
   }

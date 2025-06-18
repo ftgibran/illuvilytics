@@ -95,6 +95,7 @@ export function CombatUnitsList({ units }: CombatUnitsListProps) {
                 <div
                   className={'relative w-full h-40 rounded-md overflow-hidden'}
                 >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={(unit.data.ImageURL as string) || ''}
                     alt={unit.name}

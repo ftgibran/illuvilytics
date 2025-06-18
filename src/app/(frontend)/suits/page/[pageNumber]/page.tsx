@@ -14,12 +14,14 @@ import PageClient from '../../page.client'
 export const dynamic = 'force-static'
 export const revalidate = 600
 
-export default async function Page({
-  params,
-}: {
-  params: { pageNumber: string }
-}) {
-  const { pageNumber } = params
+type Args = {
+  params: Promise<{
+    pageNumber: string
+  }>
+}
+
+export default async function Page({ params: paramsPromise }: Args) {
+  const { pageNumber } = await paramsPromise
   const pageNum = Number(pageNumber)
 
   if (!pageNum) {
