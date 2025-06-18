@@ -1,0 +1,1138 @@
+import type { RequiredDataFromCollectionSlug } from 'payload'
+
+// Used for pre-seeded content so that the homepage is not empty
+export const homePage: RequiredDataFromCollectionSlug<'pages'> = {
+  createdAt: '2025-06-18T11:45:32.749Z',
+  updatedAt: '2025-06-18T12:34:36.573Z',
+  hero: {
+    type: 'highImpact',
+    richText: {
+      root: {
+        children: [
+          {
+            children: [
+              {
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: 'Illuvilytics',
+                type: 'text',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            type: 'heading',
+            version: 1,
+            tag: 'h1',
+          },
+          {
+            children: [
+              {
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: 'Your ultimate ',
+                type: 'text',
+                version: 1,
+              },
+              {
+                detail: 0,
+                format: 1,
+                mode: 'normal',
+                style: '',
+                text: 'community-driven companion',
+                type: 'text',
+                version: 1,
+              },
+              {
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: ' for all your Illuvium needs. Master the meta, dominate tournaments, and connect with fellow Rangers.',
+                type: 'text',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            type: 'paragraph',
+            version: 1,
+            textFormat: 0,
+            textStyle: '',
+          },
+        ],
+        direction: 'ltr',
+        format: '',
+        indent: 0,
+        type: 'root',
+        version: 1,
+      },
+    },
+    links: [
+      {
+        link: {
+          type: 'custom',
+          newTab: false,
+          url: '/set-one',
+          label: 'Explore Set 1',
+          appearance: 'default',
+        },
+        id: '6852ae40a87850717be3ffde',
+      },
+      {
+        link: {
+          type: 'custom',
+          reference: {
+            relationTo: 'pages',
+            // @ts-expect-error partial pages here
+            value: {
+              slug: 'home',
+              title: 'Home',
+              id: '6852a6dc2333efa314c0e932',
+            },
+          },
+          url: '/join-tournaments',
+          label: 'Join Tournaments',
+          appearance: 'outline',
+        },
+        id: '6852ae5ea87850717be3ffe0',
+      },
+      {
+        link: {
+          type: 'custom',
+          url: '/getting-started-guide',
+          label: 'Read Guides',
+          appearance: 'outline',
+        },
+        id: '6852ae8ea87850717be3ffe2',
+      },
+    ],
+    media: {
+      createdAt: '2025-06-18T11:47:38.424Z',
+      updatedAt: '2025-06-18T11:47:38.424Z',
+      filename: 'collect-them-all-2880x1774-3.webp',
+      mimeType: 'image/webp',
+      filesize: 217240,
+      width: 2880,
+      height: 1774,
+      focalX: 50,
+      focalY: 50,
+      sizes: {
+        thumbnail: {
+          width: 300,
+          height: 185,
+          mimeType: 'image/webp',
+          filesize: 10260,
+          filename: 'collect-them-all-2880x1774-3-300x185.webp',
+          url: '/api/media/file/collect-them-all-2880x1774-3-300x185.webp',
+        },
+        square: {
+          width: 500,
+          height: 500,
+          mimeType: 'image/webp',
+          filesize: 38200,
+          filename: 'collect-them-all-2880x1774-3-500x500.webp',
+          url: '/api/media/file/collect-them-all-2880x1774-3-500x500.webp',
+        },
+        small: {
+          width: 600,
+          height: 370,
+          mimeType: 'image/webp',
+          filesize: 29266,
+          filename: 'collect-them-all-2880x1774-3-600x370.webp',
+          url: '/api/media/file/collect-them-all-2880x1774-3-600x370.webp',
+        },
+        medium: {
+          width: 900,
+          height: 554,
+          mimeType: 'image/webp',
+          filesize: 52164,
+          filename: 'collect-them-all-2880x1774-3-900x554.webp',
+          url: '/api/media/file/collect-them-all-2880x1774-3-900x554.webp',
+        },
+        large: {
+          width: 1400,
+          height: 862,
+          mimeType: 'image/webp',
+          filesize: 94432,
+          filename: 'collect-them-all-2880x1774-3-1400x862.webp',
+          url: '/api/media/file/collect-them-all-2880x1774-3-1400x862.webp',
+        },
+        xlarge: {
+          width: 1920,
+          height: 1183,
+          mimeType: 'image/webp',
+          filesize: 142732,
+          filename: 'collect-them-all-2880x1774-3-1920x1183.webp',
+          url: '/api/media/file/collect-them-all-2880x1774-3-1920x1183.webp',
+        },
+        og: {
+          width: 1200,
+          height: 630,
+          mimeType: 'image/webp',
+          filesize: 74914,
+          filename: 'collect-them-all-2880x1774-3-1200x630.webp',
+          url: '/api/media/file/collect-them-all-2880x1774-3-1200x630.webp',
+        },
+      },
+      id: '6852a75a2333efa314c0e9c4',
+      url: '/api/media/file/collect-them-all-2880x1774-3.webp',
+      thumbnailURL: '/api/media/file/collect-them-all-2880x1774-3-300x185.webp',
+    },
+  },
+  layout: [
+    {
+      blockType: 'section',
+      content: {
+        root: {
+          children: [
+            {
+              type: 'block',
+              version: 2,
+              format: '',
+              fields: {
+                id: '6852a7bf70bbdde232f098ea',
+                size: 'lg',
+                content: {
+                  root: {
+                    children: [
+                      {
+                        type: 'block',
+                        version: 2,
+                        format: '',
+                        fields: {
+                          id: '6852a7d370bbdde232f098eb',
+                          blockName: '',
+                          centralized: false,
+                          nroOfColumns: 4,
+                          columns: [
+                            {
+                              id: '6852a827a87850717be3ffd6',
+                              content: {
+                                root: {
+                                  children: [
+                                    {
+                                      type: 'block',
+                                      version: 2,
+                                      format: '',
+                                      fields: {
+                                        id: '6852a83570bbdde232f098ec',
+                                        icon: {
+                                          createdAt: '2025-06-18T11:59:11.344Z',
+                                          updatedAt: '2025-06-18T11:59:11.344Z',
+                                          filename: 'icon_analytics.webp',
+                                          mimeType: 'image/webp',
+                                          filesize: 78200,
+                                          width: 1024,
+                                          height: 1024,
+                                          focalX: 50,
+                                          focalY: 50,
+                                          sizes: {
+                                            thumbnail: {
+                                              width: 300,
+                                              height: 300,
+                                              mimeType: 'image/webp',
+                                              filesize: 13414,
+                                              filename:
+                                                'icon_analytics-300x300.webp',
+                                              url: '/api/media/file/icon_analytics-300x300.webp',
+                                            },
+                                            square: {
+                                              width: 500,
+                                              height: 500,
+                                              mimeType: 'image/webp',
+                                              filesize: 15622,
+                                              filename:
+                                                'icon_analytics-500x500.webp',
+                                              url: '/api/media/file/icon_analytics-500x500.webp',
+                                            },
+                                            small: {
+                                              width: 600,
+                                              height: 600,
+                                              mimeType: 'image/webp',
+                                              filesize: 48866,
+                                              filename:
+                                                'icon_analytics-600x600.webp',
+                                              url: '/api/media/file/icon_analytics-600x600.webp',
+                                            },
+                                            medium: {
+                                              width: 900,
+                                              height: 900,
+                                              mimeType: 'image/webp',
+                                              filesize: 102160,
+                                              filename:
+                                                'icon_analytics-900x900.webp',
+                                              url: '/api/media/file/icon_analytics-900x900.webp',
+                                            },
+                                            large: {
+                                              width: null,
+                                              height: null,
+                                              mimeType: null,
+                                              filesize: null,
+                                              filename: null,
+                                              url: null,
+                                            },
+                                            xlarge: {
+                                              width: null,
+                                              height: null,
+                                              mimeType: null,
+                                              filesize: null,
+                                              filename: null,
+                                              url: null,
+                                            },
+                                            og: {
+                                              width: 1200,
+                                              height: 630,
+                                              mimeType: 'image/webp',
+                                              filesize: 76970,
+                                              filename:
+                                                'icon_analytics-1200x630.webp',
+                                              url: '/api/media/file/icon_analytics-1200x630.webp',
+                                            },
+                                          },
+                                          id: '6852aa0f2333efa314c0ec7b',
+                                          url: '/api/media/file/icon_analytics.webp',
+                                          thumbnailURL:
+                                            '/api/media/file/icon_analytics-300x300.webp',
+                                        },
+                                        title: 'Analytics',
+                                        links: [],
+                                        subtitle:
+                                          'Meta stats, player activity, and match data',
+                                        blockName: '',
+                                        blockType: 'card',
+                                      },
+                                    },
+                                  ],
+                                  direction: null,
+                                  format: '',
+                                  indent: 0,
+                                  type: 'root',
+                                  version: 1,
+                                },
+                              },
+                            },
+                            {
+                              id: '6852a829a87850717be3ffd8',
+                              content: {
+                                root: {
+                                  children: [
+                                    {
+                                      type: 'block',
+                                      version: 2,
+                                      format: '',
+                                      fields: {
+                                        id: '6852a83b70bbdde232f098ed',
+                                        icon: {
+                                          createdAt: '2025-06-18T11:59:27.454Z',
+                                          updatedAt: '2025-06-18T11:59:27.454Z',
+                                          filename: 'icon_tier.webp',
+                                          mimeType: 'image/webp',
+                                          filesize: 100998,
+                                          width: 1024,
+                                          height: 1024,
+                                          focalX: 50,
+                                          focalY: 50,
+                                          sizes: {
+                                            thumbnail: {
+                                              width: 300,
+                                              height: 300,
+                                              mimeType: 'image/webp',
+                                              filesize: 16224,
+                                              filename:
+                                                'icon_tier-300x300.webp',
+                                              url: '/api/media/file/icon_tier-300x300.webp',
+                                            },
+                                            square: {
+                                              width: 500,
+                                              height: 500,
+                                              mimeType: 'image/webp',
+                                              filesize: 28174,
+                                              filename:
+                                                'icon_tier-500x500.webp',
+                                              url: '/api/media/file/icon_tier-500x500.webp',
+                                            },
+                                            small: {
+                                              width: 600,
+                                              height: 600,
+                                              mimeType: 'image/webp',
+                                              filesize: 55944,
+                                              filename:
+                                                'icon_tier-600x600.webp',
+                                              url: '/api/media/file/icon_tier-600x600.webp',
+                                            },
+                                            medium: {
+                                              width: 900,
+                                              height: 900,
+                                              mimeType: 'image/webp',
+                                              filesize: 116604,
+                                              filename:
+                                                'icon_tier-900x900.webp',
+                                              url: '/api/media/file/icon_tier-900x900.webp',
+                                            },
+                                            large: {
+                                              width: null,
+                                              height: null,
+                                              mimeType: null,
+                                              filesize: null,
+                                              filename: null,
+                                              url: null,
+                                            },
+                                            xlarge: {
+                                              width: null,
+                                              height: null,
+                                              mimeType: null,
+                                              filesize: null,
+                                              filename: null,
+                                              url: null,
+                                            },
+                                            og: {
+                                              width: 1200,
+                                              height: 630,
+                                              mimeType: 'image/webp',
+                                              filesize: 95664,
+                                              filename:
+                                                'icon_tier-1200x630.webp',
+                                              url: '/api/media/file/icon_tier-1200x630.webp',
+                                            },
+                                          },
+                                          id: '6852aa1f2333efa314c0ec9f',
+                                          url: '/api/media/file/icon_tier.webp',
+                                          thumbnailURL:
+                                            '/api/media/file/icon_tier-300x300.webp',
+                                        },
+                                        title: 'Tier Lists',
+                                        links: [],
+                                        subtitle:
+                                          'Comprehensive rankings for all game elements',
+                                        blockName: '',
+                                        blockType: 'card',
+                                      },
+                                    },
+                                  ],
+                                  direction: null,
+                                  format: '',
+                                  indent: 0,
+                                  type: 'root',
+                                  version: 1,
+                                },
+                              },
+                            },
+                            {
+                              id: '6852a82ba87850717be3ffda',
+                              content: {
+                                root: {
+                                  children: [
+                                    {
+                                      type: 'block',
+                                      version: 2,
+                                      format: '',
+                                      fields: {
+                                        id: '6852a84170bbdde232f098ee',
+                                        icon: {
+                                          createdAt: '2025-06-18T11:59:38.787Z',
+                                          updatedAt: '2025-06-18T11:59:38.787Z',
+                                          filename: 'icon_strategy.webp',
+                                          mimeType: 'image/webp',
+                                          filesize: 78876,
+                                          width: 1024,
+                                          height: 1024,
+                                          focalX: 50,
+                                          focalY: 50,
+                                          sizes: {
+                                            thumbnail: {
+                                              width: 300,
+                                              height: 300,
+                                              mimeType: 'image/webp',
+                                              filesize: 14952,
+                                              filename:
+                                                'icon_strategy-300x300.webp',
+                                              url: '/api/media/file/icon_strategy-300x300.webp',
+                                            },
+                                            square: {
+                                              width: 500,
+                                              height: 500,
+                                              mimeType: 'image/webp',
+                                              filesize: 21590,
+                                              filename:
+                                                'icon_strategy-500x500.webp',
+                                              url: '/api/media/file/icon_strategy-500x500.webp',
+                                            },
+                                            small: {
+                                              width: 600,
+                                              height: 600,
+                                              mimeType: 'image/webp',
+                                              filesize: 48070,
+                                              filename:
+                                                'icon_strategy-600x600.webp',
+                                              url: '/api/media/file/icon_strategy-600x600.webp',
+                                            },
+                                            medium: {
+                                              width: 900,
+                                              height: 900,
+                                              mimeType: 'image/webp',
+                                              filesize: 100194,
+                                              filename:
+                                                'icon_strategy-900x900.webp',
+                                              url: '/api/media/file/icon_strategy-900x900.webp',
+                                            },
+                                            large: {
+                                              width: null,
+                                              height: null,
+                                              mimeType: null,
+                                              filesize: null,
+                                              filename: null,
+                                              url: null,
+                                            },
+                                            xlarge: {
+                                              width: null,
+                                              height: null,
+                                              mimeType: null,
+                                              filesize: null,
+                                              filename: null,
+                                              url: null,
+                                            },
+                                            og: {
+                                              width: 1200,
+                                              height: 630,
+                                              mimeType: 'image/webp',
+                                              filesize: 97560,
+                                              filename:
+                                                'icon_strategy-1200x630.webp',
+                                              url: '/api/media/file/icon_strategy-1200x630.webp',
+                                            },
+                                          },
+                                          id: '6852aa2a2333efa314c0ecc0',
+                                          url: '/api/media/file/icon_strategy.webp',
+                                          thumbnailURL:
+                                            '/api/media/file/icon_strategy-300x300.webp',
+                                        },
+                                        title: 'Strategy Guides',
+                                        links: [],
+                                        subtitle:
+                                          'In-depth guides and meta analysis',
+                                        blockName: '',
+                                        blockType: 'card',
+                                      },
+                                    },
+                                  ],
+                                  direction: null,
+                                  format: '',
+                                  indent: 0,
+                                  type: 'root',
+                                  version: 1,
+                                },
+                              },
+                            },
+                            {
+                              id: '6852a876a87850717be3ffdc',
+                              content: {
+                                root: {
+                                  children: [
+                                    {
+                                      type: 'block',
+                                      version: 2,
+                                      format: '',
+                                      fields: {
+                                        id: '6852a87a70bbdde232f098ef',
+                                        icon: {
+                                          createdAt: '2025-06-18T11:59:48.924Z',
+                                          updatedAt: '2025-06-18T11:59:48.924Z',
+                                          filename: 'icon_community.webp',
+                                          mimeType: 'image/webp',
+                                          filesize: 72720,
+                                          width: 1024,
+                                          height: 1024,
+                                          focalX: 50,
+                                          focalY: 50,
+                                          sizes: {
+                                            thumbnail: {
+                                              width: 300,
+                                              height: 300,
+                                              mimeType: 'image/webp',
+                                              filesize: 13546,
+                                              filename:
+                                                'icon_community-300x300.webp',
+                                              url: '/api/media/file/icon_community-300x300.webp',
+                                            },
+                                            square: {
+                                              width: 500,
+                                              height: 500,
+                                              mimeType: 'image/webp',
+                                              filesize: 18966,
+                                              filename:
+                                                'icon_community-500x500.webp',
+                                              url: '/api/media/file/icon_community-500x500.webp',
+                                            },
+                                            small: {
+                                              width: 600,
+                                              height: 600,
+                                              mimeType: 'image/webp',
+                                              filesize: 48004,
+                                              filename:
+                                                'icon_community-600x600.webp',
+                                              url: '/api/media/file/icon_community-600x600.webp',
+                                            },
+                                            medium: {
+                                              width: 900,
+                                              height: 900,
+                                              mimeType: 'image/webp',
+                                              filesize: 92640,
+                                              filename:
+                                                'icon_community-900x900.webp',
+                                              url: '/api/media/file/icon_community-900x900.webp',
+                                            },
+                                            large: {
+                                              width: null,
+                                              height: null,
+                                              mimeType: null,
+                                              filesize: null,
+                                              filename: null,
+                                              url: null,
+                                            },
+                                            xlarge: {
+                                              width: null,
+                                              height: null,
+                                              mimeType: null,
+                                              filesize: null,
+                                              filename: null,
+                                              url: null,
+                                            },
+                                            og: {
+                                              width: 1200,
+                                              height: 630,
+                                              mimeType: 'image/webp',
+                                              filesize: 71988,
+                                              filename:
+                                                'icon_community-1200x630.webp',
+                                              url: '/api/media/file/icon_community-1200x630.webp',
+                                            },
+                                          },
+                                          id: '6852aa342333efa314c0ece1',
+                                          url: '/api/media/file/icon_community.webp',
+                                          thumbnailURL:
+                                            '/api/media/file/icon_community-300x300.webp',
+                                        },
+                                        title: 'Community Tools',
+                                        links: [],
+                                        subtitle:
+                                          'Build and share compositions with the community',
+                                        blockName: '',
+                                        blockType: 'card',
+                                      },
+                                    },
+                                  ],
+                                  direction: null,
+                                  format: '',
+                                  indent: 0,
+                                  type: 'root',
+                                  version: 1,
+                                },
+                              },
+                            },
+                          ],
+                          blockType: 'grid',
+                        },
+                      },
+                      {
+                        children: [
+                          {
+                            detail: 0,
+                            format: 0,
+                            mode: 'normal',
+                            style: '',
+                            text: 'Complete Set 1: Genesis Coverage',
+                            type: 'text',
+                            version: 1,
+                          },
+                        ],
+                        direction: 'ltr',
+                        format: 'center',
+                        indent: 0,
+                        type: 'heading',
+                        version: 1,
+                        tag: 'h3',
+                      },
+                      {
+                        type: 'block',
+                        version: 2,
+                        format: '',
+                        fields: {
+                          id: '6852af4170bbdde232f098f1',
+                          blockName: '',
+                          centralized: false,
+                          nroOfColumns: 6,
+                          columns: [
+                            {
+                              id: '6852af55a87850717be3ffe4',
+                              content: {
+                                root: {
+                                  children: [
+                                    {
+                                      type: 'block',
+                                      version: 2,
+                                      format: '',
+                                      fields: {
+                                        id: '6852afad70bbdde232f098f2',
+                                        title: '150+',
+                                        links: [],
+                                        content: {
+                                          root: {
+                                            children: [
+                                              {
+                                                children: [],
+                                                direction: null,
+                                                format: '',
+                                                indent: 0,
+                                                type: 'paragraph',
+                                                version: 1,
+                                                textFormat: 0,
+                                                textStyle: '',
+                                              },
+                                            ],
+                                            direction: null,
+                                            format: '',
+                                            indent: 0,
+                                            type: 'root',
+                                            version: 1,
+                                          },
+                                        },
+                                        subtitle: 'Illuvials',
+                                        blockName: '',
+                                        blockType: 'card',
+                                      },
+                                    },
+                                  ],
+                                  direction: null,
+                                  format: '',
+                                  indent: 0,
+                                  type: 'root',
+                                  version: 1,
+                                },
+                              },
+                            },
+                            {
+                              id: '6852aff0a87850717be3ffe9',
+                              content: {
+                                root: {
+                                  children: [
+                                    {
+                                      type: 'block',
+                                      version: 2,
+                                      format: '',
+                                      fields: {
+                                        id: '6852afad70bbdde232f098f2',
+                                        title: '80+',
+                                        links: [],
+                                        content: {
+                                          root: {
+                                            children: [
+                                              {
+                                                children: [],
+                                                direction: null,
+                                                format: '',
+                                                indent: 0,
+                                                type: 'paragraph',
+                                                version: 1,
+                                                textFormat: 0,
+                                                textStyle: '',
+                                              },
+                                            ],
+                                            direction: null,
+                                            format: '',
+                                            indent: 0,
+                                            type: 'root',
+                                            version: 1,
+                                          },
+                                        },
+                                        subtitle: 'Augments',
+                                        blockName: '',
+                                        blockType: 'card',
+                                      },
+                                    },
+                                  ],
+                                  direction: null,
+                                  format: '',
+                                  indent: 0,
+                                  type: 'root',
+                                  version: 1,
+                                },
+                              },
+                            },
+                            {
+                              id: '6852aff9a87850717be3ffef',
+                              content: {
+                                root: {
+                                  children: [
+                                    {
+                                      type: 'block',
+                                      version: 2,
+                                      format: '',
+                                      fields: {
+                                        id: '6852afad70bbdde232f098f2',
+                                        title: '12',
+                                        links: [],
+                                        content: {
+                                          root: {
+                                            children: [
+                                              {
+                                                children: [],
+                                                direction: null,
+                                                format: '',
+                                                indent: 0,
+                                                type: 'paragraph',
+                                                version: 1,
+                                                textFormat: 0,
+                                                textStyle: '',
+                                              },
+                                            ],
+                                            direction: null,
+                                            format: '',
+                                            indent: 0,
+                                            type: 'root',
+                                            version: 1,
+                                          },
+                                        },
+                                        subtitle: 'Legendaries',
+                                        blockName: '',
+                                        blockType: 'card',
+                                      },
+                                    },
+                                  ],
+                                  direction: null,
+                                  format: '',
+                                  indent: 0,
+                                  type: 'root',
+                                  version: 1,
+                                },
+                              },
+                            },
+                            {
+                              id: '6852affda87850717be3fff5',
+                              content: {
+                                root: {
+                                  children: [
+                                    {
+                                      type: 'block',
+                                      version: 2,
+                                      format: '',
+                                      fields: {
+                                        id: '6852afad70bbdde232f098f2',
+                                        title: '45+',
+                                        links: [],
+                                        content: {
+                                          root: {
+                                            children: [
+                                              {
+                                                children: [],
+                                                direction: null,
+                                                format: '',
+                                                indent: 0,
+                                                type: 'paragraph',
+                                                version: 1,
+                                                textFormat: 0,
+                                                textStyle: '',
+                                              },
+                                            ],
+                                            direction: null,
+                                            format: '',
+                                            indent: 0,
+                                            type: 'root',
+                                            version: 1,
+                                          },
+                                        },
+                                        subtitle: 'Weapons',
+                                        blockName: '',
+                                        blockType: 'card',
+                                      },
+                                    },
+                                  ],
+                                  direction: null,
+                                  format: '',
+                                  indent: 0,
+                                  type: 'root',
+                                  version: 1,
+                                },
+                              },
+                            },
+                            {
+                              id: '6852b002a87850717be3fffb',
+                              content: {
+                                root: {
+                                  children: [
+                                    {
+                                      type: 'block',
+                                      version: 2,
+                                      format: '',
+                                      fields: {
+                                        id: '6852afad70bbdde232f098f2',
+                                        title: '30+',
+                                        links: [],
+                                        content: {
+                                          root: {
+                                            children: [
+                                              {
+                                                children: [],
+                                                direction: null,
+                                                format: '',
+                                                indent: 0,
+                                                type: 'paragraph',
+                                                version: 1,
+                                                textFormat: 0,
+                                                textStyle: '',
+                                              },
+                                            ],
+                                            direction: null,
+                                            format: '',
+                                            indent: 0,
+                                            type: 'root',
+                                            version: 1,
+                                          },
+                                        },
+                                        subtitle: 'Amplifiers',
+                                        blockName: '',
+                                        blockType: 'card',
+                                      },
+                                    },
+                                  ],
+                                  direction: null,
+                                  format: '',
+                                  indent: 0,
+                                  type: 'root',
+                                  version: 1,
+                                },
+                              },
+                            },
+                            {
+                              id: '6852b006a87850717be40001',
+                              content: {
+                                root: {
+                                  children: [
+                                    {
+                                      type: 'block',
+                                      version: 2,
+                                      format: '',
+                                      fields: {
+                                        id: '6852afad70bbdde232f098f2',
+                                        title: '25+',
+                                        links: [],
+                                        content: {
+                                          root: {
+                                            children: [
+                                              {
+                                                children: [],
+                                                direction: null,
+                                                format: '',
+                                                indent: 0,
+                                                type: 'paragraph',
+                                                version: 1,
+                                                textFormat: 0,
+                                                textStyle: '',
+                                              },
+                                            ],
+                                            direction: null,
+                                            format: '',
+                                            indent: 0,
+                                            type: 'root',
+                                            version: 1,
+                                          },
+                                        },
+                                        subtitle: 'Drones',
+                                        blockName: '',
+                                        blockType: 'card',
+                                      },
+                                    },
+                                  ],
+                                  direction: null,
+                                  format: '',
+                                  indent: 0,
+                                  type: 'root',
+                                  version: 1,
+                                },
+                              },
+                            },
+                          ],
+                          blockType: 'grid',
+                        },
+                      },
+                      {
+                        children: [],
+                        direction: null,
+                        format: '',
+                        indent: 0,
+                        type: 'paragraph',
+                        version: 1,
+                        textFormat: 0,
+                        textStyle: '',
+                      },
+                      { type: 'horizontalrule', version: 1 },
+                      {
+                        children: [],
+                        direction: null,
+                        format: '',
+                        indent: 0,
+                        type: 'paragraph',
+                        version: 1,
+                        textFormat: 0,
+                        textStyle: '',
+                      },
+                      {
+                        type: 'block',
+                        version: 2,
+                        format: '',
+                        fields: {
+                          id: '6852ad3f70bbdde232f098f0',
+                          title: '',
+                          links: [],
+                          content: {
+                            root: {
+                              children: [
+                                {
+                                  children: [
+                                    {
+                                      detail: 0,
+                                      format: 0,
+                                      mode: 'normal',
+                                      style: '',
+                                      text: 'Built by Rangers, for Rangers. Join thousands of players using DataKingz to master the meta, climb the ranks, and dominate the Gauntlet. Your journey to becoming a legendary Ranger starts here.',
+                                      type: 'text',
+                                      version: 1,
+                                    },
+                                  ],
+                                  direction: 'ltr',
+                                  format: 'center',
+                                  indent: 0,
+                                  type: 'paragraph',
+                                  version: 1,
+                                  textFormat: 0,
+                                  textStyle: '',
+                                },
+                              ],
+                              direction: 'ltr',
+                              format: '',
+                              indent: 0,
+                              type: 'root',
+                              version: 1,
+                            },
+                          },
+                          subtitle:
+                            'Community Driven | Open Source | Always Updated',
+                          blockName: '',
+                          blockType: 'card',
+                        },
+                      },
+                    ],
+                    direction: 'ltr',
+                    format: '',
+                    indent: 0,
+                    type: 'root',
+                    version: 1,
+                  },
+                },
+                blockName: '',
+                blockType: 'container',
+              },
+            },
+          ],
+          direction: null,
+          format: '',
+          indent: 0,
+          type: 'root',
+          version: 1,
+        },
+      },
+      columns: [],
+      id: '6852a77ba87850717be3ffd2',
+    },
+  ],
+  meta: {
+    title:
+      'Your journey to becoming a legendary Ranger starts here | Illuvilytics',
+    image: {
+      createdAt: '2025-06-18T11:47:38.424Z',
+      updatedAt: '2025-06-18T11:47:38.424Z',
+      filename: 'collect-them-all-2880x1774-3.webp',
+      mimeType: 'image/webp',
+      filesize: 217240,
+      width: 2880,
+      height: 1774,
+      focalX: 50,
+      focalY: 50,
+      sizes: {
+        thumbnail: {
+          width: 300,
+          height: 185,
+          mimeType: 'image/webp',
+          filesize: 10260,
+          filename: 'collect-them-all-2880x1774-3-300x185.webp',
+          url: '/api/media/file/collect-them-all-2880x1774-3-300x185.webp',
+        },
+        square: {
+          width: 500,
+          height: 500,
+          mimeType: 'image/webp',
+          filesize: 38200,
+          filename: 'collect-them-all-2880x1774-3-500x500.webp',
+          url: '/api/media/file/collect-them-all-2880x1774-3-500x500.webp',
+        },
+        small: {
+          width: 600,
+          height: 370,
+          mimeType: 'image/webp',
+          filesize: 29266,
+          filename: 'collect-them-all-2880x1774-3-600x370.webp',
+          url: '/api/media/file/collect-them-all-2880x1774-3-600x370.webp',
+        },
+        medium: {
+          width: 900,
+          height: 554,
+          mimeType: 'image/webp',
+          filesize: 52164,
+          filename: 'collect-them-all-2880x1774-3-900x554.webp',
+          url: '/api/media/file/collect-them-all-2880x1774-3-900x554.webp',
+        },
+        large: {
+          width: 1400,
+          height: 862,
+          mimeType: 'image/webp',
+          filesize: 94432,
+          filename: 'collect-them-all-2880x1774-3-1400x862.webp',
+          url: '/api/media/file/collect-them-all-2880x1774-3-1400x862.webp',
+        },
+        xlarge: {
+          width: 1920,
+          height: 1183,
+          mimeType: 'image/webp',
+          filesize: 142732,
+          filename: 'collect-them-all-2880x1774-3-1920x1183.webp',
+          url: '/api/media/file/collect-them-all-2880x1774-3-1920x1183.webp',
+        },
+        og: {
+          width: 1200,
+          height: 630,
+          mimeType: 'image/webp',
+          filesize: 74914,
+          filename: 'collect-them-all-2880x1774-3-1200x630.webp',
+          url: '/api/media/file/collect-them-all-2880x1774-3-1200x630.webp',
+        },
+      },
+      id: '6852a75a2333efa314c0e9c4',
+      url: '/api/media/file/collect-them-all-2880x1774-3.webp',
+      thumbnailURL: '/api/media/file/collect-them-all-2880x1774-3-300x185.webp',
+    },
+    description:
+      'Your ultimate community-driven companion for all your Illuvium needs. Master the meta, dominate tournaments, and connect with fellow Rangers.',
+  },
+  slugLock: true,
+  _status: 'published',
+  publishedAt: '2025-06-18T11:59:50.374Z',
+  slug: 'home',
+  title: 'Home',
+  id: '6852a6dc2333efa314c0e932',
+}

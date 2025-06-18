@@ -11,7 +11,7 @@ export const Card: Block = {
   slug: 'card',
   interfaceName: 'CardBlock',
   fields: [
-    { name: 'title', type: 'text', required: true },
+    { name: 'title', type: 'text' },
     { name: 'subtitle', type: 'text' },
     { name: 'icon', type: 'upload', relationTo: 'media' },
     {

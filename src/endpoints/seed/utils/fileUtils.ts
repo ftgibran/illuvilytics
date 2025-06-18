@@ -35,7 +35,7 @@ export const readJsonFile = (filePath: string, payload: Payload) => {
  * @return {Promise<File>} A promise that resolves to a File object containing the fetched file data.
  * @throws {Error} Throws an error if the fetch operation fails or the response status is not OK.
  */
-async function _fetchFileByURL(url: string): Promise<File> {
+export async function fetchFileByURL(url: string): Promise<File> {
   const res = await fetch(url, {
     credentials: 'include',
     method: 'GET',

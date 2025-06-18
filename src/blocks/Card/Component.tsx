@@ -2,6 +2,7 @@ import React from 'react'
 import type { CardBlock as CardBlockProps } from 'src/payload-types'
 
 import { CMSLink } from '@/components/Link'
+import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
 import { Card, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 
@@ -10,13 +11,25 @@ type Props = {
 } & CardBlockProps
 
 export const CardBlock: React.FC<Props> = (props) => {
-  const { title, subtitle, content, links } = props
+  const { title, subtitle, icon, content, links } = props
 
   return (
     <Card className={'w-full h-full p-4 shadow-lg'}>
-      <CardTitle className={'text-center'}>{title}</CardTitle>
+      {title && <CardTitle className={'text-center'}>{title}</CardTitle>}
 
-      <CardHeader className={'text-center'}>{subtitle}</CardHeader>
+      {icon && (
+        <div className={'flex justify-center'}>
+          <Media
+            pictureClassName={'my-2'}
+            imgClassName={'w-16'}
+            resource={icon}
+          />
+        </div>
+      )}
+
+      {subtitle && (
+        <CardHeader className={'text-center'}>{subtitle}</CardHeader>
+      )}
 
       {content && (
         <RichText

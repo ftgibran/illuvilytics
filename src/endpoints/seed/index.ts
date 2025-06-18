@@ -5,7 +5,9 @@ import { seedCombatUnits } from '@/endpoints/seed/database/resources/seedCombatU
 import { seedSuits } from '@/endpoints/seed/database/resources/seedSuits'
 import { seedSynergies } from '@/endpoints/seed/database/resources/seedSynergies'
 import { seedWeapons } from '@/endpoints/seed/database/resources/seedWeapons'
-import { seedUser } from '@/endpoints/seed/database/seedUser'
+import { seedUsers } from '@/endpoints/seed/database/seedUsers'
+import { seedMedia } from '@/endpoints/seed/media/seedMedia'
+import { seedPages } from '@/endpoints/seed/pages/seedPages'
 
 export interface SeedOptions {
   payload: Payload
@@ -38,11 +40,11 @@ export const seed = async ({ payload, req }: SeedOptions): Promise<void> => {
 
   payload.logger.info(`👤 Seeding demo author and user...`)
 
-  await seedUser(payload)
+  await seedUsers(payload)
 
   payload.logger.info(`📸 Seeding media...`)
 
-  //
+  await seedMedia(payload)
 
   payload.logger.info(`📝 Seeding contact form...`)
 
@@ -50,7 +52,7 @@ export const seed = async ({ payload, req }: SeedOptions): Promise<void> => {
 
   payload.logger.info(`📄 Seeding pages...`)
 
-  //
+  await seedPages(payload)
 
   payload.logger.info(`🌐 Seeding globals...`)
 

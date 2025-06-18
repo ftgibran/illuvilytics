@@ -1960,7 +1960,7 @@ export interface TaskSchedulePublish {
  * via the `definition` "CardBlock".
  */
 export interface CardBlock {
-  title: string;
+  title?: string | null;
   subtitle?: string | null;
   icon?: (string | null) | Media;
   content?: {

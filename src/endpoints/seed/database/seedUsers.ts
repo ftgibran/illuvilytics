@@ -1,6 +1,6 @@
 import { Payload } from 'payload'
 
-export const seedUser = async (payload: Payload) => {
+export const seedUsers = async (payload: Payload) => {
   const existing = await payload.find({
     collection: 'users',
     where: { email: { equals: 'admin@illuvium.io' } },
