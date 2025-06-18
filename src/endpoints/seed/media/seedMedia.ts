@@ -1,4 +1,3 @@
-import path from 'path'
 import { Payload } from 'payload'
 
 import { collectThemAllWebp } from '@/endpoints/seed/media/static/collectThemAllWebp'
@@ -6,17 +5,25 @@ import { iconAnalyticsWebp } from '@/endpoints/seed/media/static/iconAnalyticsWe
 import { iconCommunityWebp } from '@/endpoints/seed/media/static/iconCommunityWebp'
 import { iconStrategyWebp } from '@/endpoints/seed/media/static/iconStrategyWebp'
 import { iconTierWebp } from '@/endpoints/seed/media/static/iconTierWebp'
-import { fetchFileByURL, getDirname } from '@/endpoints/seed/utils/fileUtils'
-
-const __dirname = getDirname(import.meta.url)
+import { fetchFileByURL } from '@/endpoints/seed/utils/fileUtils'
 
 export const seedMedia = async (payload: Payload) => {
   const images = await Promise.all([
-    fetchFileByURL(path.join(__dirname, './static/collect_them_all.webp')),
-    fetchFileByURL(path.join(__dirname, './static/icon_analytics.webp')),
-    fetchFileByURL(path.join(__dirname, './static/icon_community.webp')),
-    fetchFileByURL(path.join(__dirname, './static/icon_strategy.webp')),
-    fetchFileByURL(path.join(__dirname, './static/icon_tier.webp')),
+    fetchFileByURL(
+      'https://raw.githubusercontent.com/ftgibran/illuvilytics/refs/heads/main/src/endpoints/seed/media/static/collect_them_all.webp',
+    ),
+    fetchFileByURL(
+      'https://raw.githubusercontent.com/ftgibran/illuvilytics/refs/heads/main/src/endpoints/seed/media/static/icon_analytics.webp',
+    ),
+    fetchFileByURL(
+      'https://raw.githubusercontent.com/ftgibran/illuvilytics/refs/heads/main/src/endpoints/seed/media/static/icon_community.webp',
+    ),
+    fetchFileByURL(
+      'https://raw.githubusercontent.com/ftgibran/illuvilytics/refs/heads/main/src/endpoints/seed/media/static/icon_strategy.webp',
+    ),
+    fetchFileByURL(
+      'https://raw.githubusercontent.com/ftgibran/illuvilytics/refs/heads/main/src/endpoints/seed/media/static/icon_tier.webp',
+    ),
   ])
 
   return await Promise.all([

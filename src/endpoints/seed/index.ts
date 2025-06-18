@@ -7,7 +7,6 @@ import { seedSynergies } from '@/endpoints/seed/database/resources/seedSynergies
 import { seedWeapons } from '@/endpoints/seed/database/resources/seedWeapons'
 import { seedUsers } from '@/endpoints/seed/database/seedUsers'
 import { seedMedia } from '@/endpoints/seed/media/seedMedia'
-import { seedPages } from '@/endpoints/seed/pages/seedPages'
 
 export interface SeedOptions {
   payload: Payload
@@ -52,7 +51,7 @@ export const seed = async ({ payload, req }: SeedOptions): Promise<void> => {
 
   payload.logger.info(`📄 Seeding pages...`)
 
-  await seedPages(payload)
+  // await seedPages(payload)
 
   payload.logger.info(`🌐 Seeding globals...`)
 
