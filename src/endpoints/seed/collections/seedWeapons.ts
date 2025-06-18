@@ -82,7 +82,7 @@ export const seedWeapons = async (payload?: Payload) => {
       })
     }
 
-    const dataDir = path.join(__dirname, '../../../data/WeaponData')
+    const dataDir = path.join(__dirname, '../../../../data/WeaponData')
     const jsonFiles = fs
       .readdirSync(dataDir)
       .filter((file) => file.endsWith('.json'))
@@ -123,9 +123,4 @@ export const seedWeapons = async (payload?: Payload) => {
 
     if (!payload) process.exit(1) // Only exit if executed directly
   }
-}
-
-// Execute directly if this file is called directly
-if (import.meta.url === `file://${process.argv[1]}`) {
-  seedWeapons()
 }

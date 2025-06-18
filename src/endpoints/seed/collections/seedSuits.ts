@@ -7,7 +7,7 @@ import path from 'path'
 import { buildConfig, getPayload, Payload } from 'payload'
 import { fileURLToPath } from 'url'
 
-import Synergies from '@/collections/Synergies'
+import Suits from '@/collections/Suits'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -21,69 +21,64 @@ const readJsonFile = (filePath: string) => {
   }
 }
 
-const processSynergyData = (data: any) => {
+const processSuitData = (data: any) => {
   return {
-    name: data.DisplayName || 'Unknown',
-    description: data.DisplayDescription || '',
+    name: data.Name || 'Unknown',
+    displayName: data.DisplayName || '',
+    displayDescription: data.DisplayDescription || '',
     type: data.Type || 'Standard',
+    variation: data.Variation || 'Standard',
     tier: data.Tier || 1,
-    requiredUnits: data.RequiredUnits || 0,
-    effects: Array.isArray(data.Effects)
-      ? data.Effects.map((effect: any) => ({
-          name: effect.Name || 'Unknown Effect',
-          description: effect.Description || '',
-        }))
-      : [],
     sourceFile: data.sourceFile || null,
     data: data,
   }
 }
 
-export const seedSynergies = async (payload?: Payload) => {
+export const seedSuits = async (payload?: Payload) => {
   try {
     // Use provided payload or create a new one
     const payloadClient =
       payload ||
       (await getPayload({
         config: buildConfig({
-          collections: [Synergies],
+          collections: [Suits],
           db: mongooseAdapter({ url: process.env.DATABASE_URI || '' }),
           secret: process.env.PAYLOAD_SECRET || '',
         }),
       }))
 
-    const existingSynergies = await payloadClient.find({
-      collection: 'synergies',
+    const existingSuits = await payloadClient.find({
+      collection: 'suits',
       limit: 1000,
     })
 
-    for (const synergy of existingSynergies.docs) {
+    for (const suit of existingSuits.docs) {
       await payloadClient.delete({
-        collection: 'synergies',
-        id: synergy.id,
+        collection: 'suits',
+        id: suit.id,
       })
     }
 
-    const dataDir = path.join(__dirname, '../../../data/SynergyData')
+    const dataDir = path.join(__dirname, '../../../../data/SuitData')
     const jsonFiles = fs
       .readdirSync(dataDir)
       .filter((file) => file.endsWith('.json'))
     let processed = 0
 
-    console.log(`Processing ${jsonFiles.length} synergies...`)
+    console.log(`Processing ${jsonFiles.length} suits...`)
 
     for (const file of jsonFiles) {
       const data = readJsonFile(path.join(dataDir, file))
 
       if (data) {
         try {
-          const processedData = processSynergyData({
+          const processedData = processSuitData({
             ...data,
             sourceFile: file,
           })
 
           await payloadClient.create({
-            collection: 'synergies',
+            collection: 'suits',
             data: processedData as never,
           })
           processed++
@@ -97,17 +92,12 @@ export const seedSynergies = async (payload?: Payload) => {
       }
     }
 
-    console.log(`Completed! ${processed} synergies processed`)
+    console.log(`Completed! ${processed} suits processed`)
 
     if (!payload) process.exit(0) // Only exit if executed directly
   } catch (error) {
-    console.error('Error seeding synergies:', error)
+    console.error('Error seeding suits:', error)
 
     if (!payload) process.exit(1) // Only exit if executed directly
   }
-}
-
-// Execute directly if this file is called directly
-if (import.meta.url === `file://${process.argv[1]}`) {
-  seedSynergies()
 }

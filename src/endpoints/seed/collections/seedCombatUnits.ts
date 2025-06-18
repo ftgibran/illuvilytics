@@ -79,7 +79,7 @@ export const seedCombatUnits = async (payload?: Payload) => {
       })
     }
 
-    const dataDir = path.join(__dirname, '../../../data/CombatUnitData')
+    const dataDir = path.join(__dirname, '../../../../data/CombatUnitData')
     const jsonFiles = fs
       .readdirSync(dataDir)
       .filter((file) => file.endsWith('.json'))
@@ -120,9 +120,4 @@ export const seedCombatUnits = async (payload?: Payload) => {
 
     if (!payload) process.exit(1) // Only exit if executed directly
   }
-}
-
-// Execute directly if this file is called directly
-if (import.meta.url === `file://${process.argv[1]}`) {
-  seedCombatUnits()
 }
