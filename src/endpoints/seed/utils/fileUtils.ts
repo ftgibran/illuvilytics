@@ -22,7 +22,7 @@ export const readJsonFile = (filePath: string, payload: Payload) => {
   try {
     return JSON.parse(fs.readFileSync(filePath, 'utf-8'))
   } catch (error) {
-    payload.logger.error(`Error reading file ${filePath}:`, error)
+    payload.logger.error(`Error reading file ${filePath}:\n${error}`)
 
     return null
   }

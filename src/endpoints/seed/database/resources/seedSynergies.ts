@@ -5,38 +5,43 @@ import fs from 'fs'
 import path from 'path'
 import { Payload } from 'payload'
 
-import { getDirname, readJsonFile } from '../utils/fileUtils'
+import { getDirname, readJsonFile } from '../../utils/fileUtils'
 
 const __dirname = getDirname(import.meta.url)
 
-const processSuitData = (data: any) => {
+const processSynergyData = (data: any) => {
   return {
-    name: data.Name || 'Unknown',
-    displayName: data.DisplayName || '',
-    displayDescription: data.DisplayDescription || '',
+    name: data.DisplayName || 'Unknown',
+    description: data.DisplayDescription || '',
     type: data.Type || 'Standard',
-    variation: data.Variation || 'Standard',
     tier: data.Tier || 1,
+    requiredUnits: data.RequiredUnits || 0,
+    effects: Array.isArray(data.Effects)
+      ? data.Effects.map((effect: any) => ({
+          name: effect.Name || 'Unknown Effect',
+          description: effect.Description || '',
+        }))
+      : [],
     sourceFile: data.sourceFile || null,
     data: data,
   }
 }
 
-export const seedSuits = async (payload: Payload) => {
+export const seedSynergies = async (payload: Payload) => {
   try {
-    const existingSuits = await payload.find({
-      collection: 'suits',
+    const existingSynergies = await payload.find({
+      collection: 'synergies',
       limit: 1000,
     })
 
-    for (const suit of existingSuits.docs) {
+    for (const synergy of existingSynergies.docs) {
       await payload.delete({
-        collection: 'suits',
-        id: suit.id,
+        collection: 'synergies',
+        id: synergy.id,
       })
     }
 
-    const dataDir = path.join(__dirname, '../../../../data/SuitData')
+    const dataDir = path.join(__dirname, '../../../../../data/SynergyData')
     const jsonFiles = fs
       .readdirSync(dataDir)
       .filter((file) => file.endsWith('.json'))
@@ -47,13 +52,13 @@ export const seedSuits = async (payload: Payload) => {
 
       if (data) {
         try {
-          const processedData = processSuitData({
+          const processedData = processSynergyData({
             ...data,
             sourceFile: file,
           })
 
           await payload.create({
-            collection: 'suits',
+            collection: 'synergies',
             data: processedData as never,
           })
 
@@ -64,11 +69,11 @@ export const seedSuits = async (payload: Payload) => {
       }
     }
 
-    payload.logger.info(`Completed! ${processed} suits processed`)
+    payload.logger.info(`Completed! ${processed} synergies processed`)
 
     if (!payload) process.exit(0) // Only exit if executed directly
   } catch (error) {
-    payload.logger.error('Error seeding suits:', error)
+    payload.logger.error(`Error seeding combat units:\n${error}`)
 
     if (!payload) process.exit(1) // Only exit if executed directly
   }

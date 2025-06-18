@@ -1,37 +1,34 @@
-import type {
-  CollectionSlug,
-  GlobalSlug,
-  Payload,
-  PayloadRequest,
-} from 'payload'
+import type { Payload, PayloadRequest } from 'payload'
 
-import { seedCombatUnits } from '@/endpoints/seed/collections/seedCombatUnits'
-import { seedSuits } from '@/endpoints/seed/collections/seedSuits'
-import { seedSynergies } from '@/endpoints/seed/collections/seedSynergies'
-import { seedWeapons } from '@/endpoints/seed/collections/seedWeapons'
+import { clearDatabase } from '@/endpoints/seed/clearDatabase'
+import { seedCombatUnits } from '@/endpoints/seed/database/resources/seedCombatUnits'
+import { seedSuits } from '@/endpoints/seed/database/resources/seedSuits'
+import { seedSynergies } from '@/endpoints/seed/database/resources/seedSynergies'
+import { seedWeapons } from '@/endpoints/seed/database/resources/seedWeapons'
+import { seedUser } from '@/endpoints/seed/database/seedUser'
 
-const collections: CollectionSlug[] = [
-  'categories',
-  'media',
-  'pages',
-  'posts',
-  'forms',
-  'form-submissions',
-  'search',
-]
-const globals: GlobalSlug[] = ['header', 'footer']
-
-// Next.js revalidation errors are normal when seeding the database without a server running
-// i.e. running `yarn seed` locally instead of using the admin UI within an active app
-// The app is not running to revalidate the pages and so the API routes are not available
-// These error messages can be ignored: `Error hitting revalidate route for...`
-export const seed = async ({
-  payload,
-  req,
-}: {
+export interface SeedOptions {
   payload: Payload
   req: PayloadRequest
-}): Promise<void> => {
+}
+
+/**
+ * Represents a function to seed the database with initial data.
+ *
+ * This function is meant to populate the database with predefined collections, globals, media,
+ * and user data. It ensures the database is cleared before seeding to avoid duplicate or
+ * conflicting entries. Typically used during setup or to reset the database state.
+ *
+ * @param {SeedOptions} param0 - The options for seeding, containing the payload and request objects.
+ * @param {Payload} param0.payload - The Payload object used for database operations and logging.
+ * @param {Request} param0.req - The Request object representing the current HTTP request context.
+ * @returns {Promise<void>} Resolves when the database has been seeded successfully.
+ */
+export const seed = async ({ payload, req }: SeedOptions): Promise<void> => {
+  payload.logger.info(`🧹 Clearing collections and globals...`)
+
+  await clearDatabase(payload, req)
+
   payload.logger.info('🚀 Seeding database...')
 
   await seedCombatUnits(payload)
@@ -39,61 +36,9 @@ export const seed = async ({
   await seedSynergies(payload)
   await seedWeapons(payload)
 
-  // we need to clear the media directory before seeding
-  // as well as the collections and globals
-  // this is because while `yarn seed` drops the database
-  // the custom `/api/seed` endpoint does not
-  payload.logger.info(`🧹 Clearing collections and globals...`)
-
-  // clear the database
-  await Promise.all(
-    globals.map((global) =>
-      payload.updateGlobal({
-        slug: global,
-        data: {
-          navItems: [],
-        },
-        depth: 0,
-        context: {
-          disableRevalidate: true,
-        },
-      }),
-    ),
-  )
-
-  await Promise.all(
-    collections.map((collection) =>
-      payload.db.deleteMany({ collection, req, where: {} }),
-    ),
-  )
-
-  await Promise.all(
-    collections
-      .filter((collection) =>
-        Boolean(payload.collections[collection].config.versions),
-      )
-      .map((collection) =>
-        payload.db.deleteVersions({ collection, req, where: {} }),
-      ),
-  )
-
   payload.logger.info(`👤 Seeding demo author and user...`)
 
-  const existing = await payload.find({
-    collection: 'users',
-    where: { email: { equals: 'admin@illuvium.io' } },
-  })
-
-  if (existing.totalDocs === 0) {
-    await payload.create({
-      collection: 'users',
-      data: {
-        name: 'Admin',
-        email: 'admin@illuvium.io',
-        password: 'admin123',
-      },
-    })
-  }
+  await seedUser(payload)
 
   payload.logger.info(`📸 Seeding media...`)
 

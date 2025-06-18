@@ -5,11 +5,11 @@ import fs from 'fs'
 import path from 'path'
 import { Payload } from 'payload'
 
-import { getDirname, readJsonFile } from '../utils/fileUtils'
+import { getDirname, readJsonFile } from '../../utils/fileUtils'
 
 const __dirname = getDirname(import.meta.url)
 
-const processWeaponData = (data: any) => {
+const processCombatUnitData = (data: any) => {
   const validateOption = (
     value: string,
     options: string[],
@@ -21,7 +21,6 @@ const processWeaponData = (data: any) => {
     return options.includes(normalizedValue) ? normalizedValue : defaultValue
   }
 
-  const validElements = ['None', 'Water', 'Earth', 'Fire', 'Nature', 'Air']
   const validClasses = [
     'None',
     'Fighter',
@@ -30,36 +29,34 @@ const processWeaponData = (data: any) => {
     'Psion',
     'Empath',
   ]
+  const validElements = ['None', 'Water', 'Earth', 'Fire', 'Nature', 'Air']
 
   return {
-    name: data.Name || 'Unknown',
-    displayName: data.DisplayName || '',
-    displayDescription: data.DisplayDescription || '',
-    type: data.Type || 'Standard',
-    variation: data.Variation || '',
-    tier: data.Tier || 1,
-    class: validateOption(data.Class, validClasses, 'None'),
-    element: validateOption(data.Element, validElements, 'None'),
+    name: data.DisplayName || 'Unknown',
+    description: data.DisplayDescription || '',
+    stage: data.Stage || 1,
+    class: validateOption(data.CombatClass, validClasses, 'None'),
+    element: validateOption(data.CombatAffinity, validElements, 'None'),
     sourceFile: data.sourceFile || null,
     data: data,
   }
 }
 
-export const seedWeapons = async (payload: Payload) => {
+export const seedCombatUnits = async (payload: Payload) => {
   try {
-    const existingWeapons = await payload.find({
-      collection: 'weapons',
+    const existingUnits = await payload.find({
+      collection: 'combat-units',
       limit: 1000,
     })
 
-    for (const weapon of existingWeapons.docs) {
+    for (const unit of existingUnits.docs) {
       await payload.delete({
-        collection: 'weapons',
-        id: weapon.id,
+        collection: 'combat-units',
+        id: unit.id,
       })
     }
 
-    const dataDir = path.join(__dirname, '../../../../data/WeaponData')
+    const dataDir = path.join(__dirname, '../../../../../data/CombatUnitData')
     const jsonFiles = fs
       .readdirSync(dataDir)
       .filter((file) => file.endsWith('.json'))
@@ -70,13 +67,13 @@ export const seedWeapons = async (payload: Payload) => {
 
       if (data) {
         try {
-          const processedData = processWeaponData({
+          const processedData = processCombatUnitData({
             ...data,
             sourceFile: file,
           })
 
           await payload.create({
-            collection: 'weapons',
+            collection: 'combat-units',
             data: processedData as never,
           })
 
@@ -87,11 +84,11 @@ export const seedWeapons = async (payload: Payload) => {
       }
     }
 
-    payload.logger.info(`Completed! ${processed} weapons processed`)
+    payload.logger.info(`Completed! ${processed} combat units processed`)
 
     if (!payload) process.exit(0) // Only exit if executed directly
   } catch (error) {
-    payload.logger.error('Error seeding weapons:', error)
+    payload.logger.error(`Error seeding combat units:\n${error}`)
 
     if (!payload) process.exit(1) // Only exit if executed directly
   }
