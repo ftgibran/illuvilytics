@@ -1,0 +1,89 @@
+[
+  {
+    "round": 1,
+    "enemies": [
+      "Lesser Water Flish"
+    ],
+    "creditRewards": "1 Credits"
+  },
+  {
+    "round": 2,
+    "enemies": [
+      "Lesser Nature Flish",
+      "Lesser Fire Flish"
+    ],
+    "creditRewards": "2 Credits"
+  },
+  {
+    "round": 7,
+    "enemies": [
+      "Greater Earth Doka",
+      "Greater Fire Doka",
+      "Greater Nature Doka"
+    ],
+    "creditRewards": "3 Credits"
+  },
+  {
+    "round": 12,
+    "enemies": [
+      "Scarabok",
+      "Krunk",
+      "Twine"
+    ],
+    "creditRewards": "14 Credits"
+  },
+  {
+    "round": 17,
+    "enemies": [
+      "Stabbin",
+      "Chukoorg",
+      "Rake",
+      "Loulura"
+    ],
+    "creditRewards": "15 Credits"
+  },
+  {
+    "round": 22,
+    "enemies": [
+      "Ryplance",
+      "Jokull",
+      "Phorus",
+      "Rai-lu",
+      "Greater Monkier"
+    ],
+    "creditRewards": "19 Credits"
+  },
+  {
+    "round": 27,
+    "enemies": [
+      "Vermilliare",
+      "Kukkaraph",
+      "Ghazotep",
+      "Archeleon",
+      "Adoredo",
+      "Fernite",
+      "Geyyser"
+    ],
+    "creditRewards": "28 Credits"
+  },
+  {
+    "round": 32,
+    "enemies": [
+      "Titanor",
+      "Gnarl",
+      "Cardulox",
+      "Archeleon",
+      "Seeforus",
+      "Dualeph",
+      "Ophisto"
+    ],
+    "creditRewards": "28 Credits"
+  },
+  {
+    "round": 37,
+    "enemies": [
+      "An army"
+    ],
+    "creditRewards": "The whole bank"
+  }
+]

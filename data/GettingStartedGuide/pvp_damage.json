@@ -1,0 +1,56 @@
+[
+  {
+    "Rounds": "3-6",
+    "Main Formula": "Winning Player Level + Number of surviving Illuvials on the Board",
+    "Modifier": "-2",
+    "Example": "So if the winning player is level 5, and has 3 units alive at the end, it will deal 5+3-2 = 6 damage"
+  },
+  {
+    "Rounds": "8-11",
+    "Main Formula": "Winning Player Level + Number of surviving Illuvials on the Board",
+    "Modifier": "-2",
+    "Example": "So if the winning player is level 5, and has 3 units alive at the end, it will deal 5+3-2 = 6 damage"
+  },
+  {
+    "Rounds": "13-16",
+    "Main Formula": "Winning Player Level + Number of surviving Illuvials on the Board",
+    "Modifier": "0",
+    "Example": "So if the winning player is level 5, and has 3 units alive at the end, it will deal 5+3+0 = 8 damage"
+  },
+  {
+    "Rounds": "18-21",
+    "Main Formula": "Winning Player Level + Number of surviving Illuvials on the Board",
+    "Modifier": " +3",
+    "Example": "So if the winning player is level 5, and has 3 units alive at the end, it will deal 5+3+3 = 11 damage"
+  },
+  {
+    "Rounds": "23-26",
+    "Main Formula": "Winning Player Level + Number of surviving Illuvials on the Board",
+    "Modifier": " +6",
+    "Example": "So if the winning player is level 5, and has 3 units alive at the end, it will deal 5+3+6 = 14 damage"
+  },
+  {
+    "Rounds": "28-31",
+    "Main Formula": "Winning Player Level + Number of surviving Illuvials on the Board",
+    "Modifier": " +10",
+    "Example": "So if the winning player is level 5, and has 3 units alive at the end, it will deal 5+3+10 = 18 damage"
+  },
+  {
+    "Rounds": "33-34",
+    "Main Formula": "Winning Player Level + Number of surviving Illuvials on the Board",
+    "Modifier": " +20",
+    "Example": "So if the winning player is level 5, and has 3 units alive at the end, it will deal 5+3+20 = 28 damage"
+  },
+  {
+    "Rounds": "35-36",
+    "Main Formula": "Winning Player Level + Number of surviving Illuvials on the Board",
+    "Modifier": " +50",
+    "Example": "So if the winning player is level 5, and has 3 units alive at the end, it will deal 5+3+50 = 58 damage"
+  },
+  {
+    "Rounds": "38+",
+    "Main Formula": "Winning Player Level + Number of surviving Illuvials on the Board",
+    "Modifier": " +100",
+    "Example": "So if the winning player is level 5, and has 3 units alive at the end, it will deal 5+3+100 = 108 damage"
+  }
+]

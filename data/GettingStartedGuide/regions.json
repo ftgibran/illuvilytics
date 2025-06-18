@@ -1,0 +1,47 @@
+[
+  {
+    "region": "No Region",
+    "name": "No Modifier",
+    "description": "Everyone is searching for Leviathan. No Region effect this game."
+  },
+  {
+    "region": "Sanctum Mesa",
+    "name": "Skip the Tutorial",
+    "description": "All players start at Level 5."
+  },
+  {
+    "region": "Abyssal Basin",
+    "name": "Imprint Alchemy",
+    "description": "Players start with 3 random Base Imprints."
+  },
+  {
+    "region": "Brighland Steppes",
+    "name": "Bulk-Up",
+    "description": "Start with an additional 30 Drone Health."
+  },
+  {
+    "region": "Crimson Waste",
+    "name": "Punishing Blows",
+    "description": "Players are dealt an additional 2 Damage if they lose a PvP Round."
+  },
+  {
+    "region": "Taiga Boreal",
+    "name": "Teeming Bayou",
+    "description": "Drone Augments can be rerolled an additional time."
+  },
+  {
+    "region": "Halcyon Sea",
+    "name": "Wave Rider",
+    "description": "Credits from Win/Loss Streaks are tripled."
+  },
+  {
+    "region": "Crystal Shores",
+    "name": "A Different Approach",
+    "description": "Tier 0 Illuvials cost 1 Credit this match."
+  },
+  {
+    "region": "Shardbluff",
+    "name": "Legendary Start",
+    "description": "Players start with a Legendary Augment Crate."
+  }
+]

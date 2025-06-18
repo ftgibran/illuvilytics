@@ -14,7 +14,6 @@
     "seed:suits": "cross-env NODE_OPTIONS='--no-deprecation' tsx src/scripts/seeds/seedSuits.ts",
     "seed:synergies": "cross-env NODE_OPTIONS='--no-deprecation' tsx src/scripts/seeds/seedSynergies.ts",
     "seed:weapons": "cross-env NODE_OPTIONS='--no-deprecation' tsx src/scripts/seeds/seedWeapons.ts",
-    "seed:faq": "cross-env NODE_OPTIONS='--no-deprecation' tsx src/scripts/seeds/seedFAQ.ts",
     "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
     "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
     "ii": "cross-env NODE_OPTIONS=--no-deprecation pnpm --ignore-workspace install",
